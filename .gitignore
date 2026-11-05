@@ -1,0 +1,19 @@
+node_modules/
+dist/
+build/
+.next/
+.env
+.env.local
+.DS_Store
+*.log
+
+# Large zip archives (avoids GitHub 100MB file limit)
+*.zip
+*.tar.gz
+
+# Backend directory (kept separate)
+backend/
+
+# Editor
+.vscode/
+.idea/

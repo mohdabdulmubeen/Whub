@@ -13,8 +13,20 @@ import {
   ShieldCheck,
   Star,
   Building2,
-  Check
+  Check,
+  Loader2,
+  AlertCircle,
+  Info,
+  ExternalLink
 } from 'lucide-react';
+import {
+  signInWithOAuth,
+  OAuthProvider,
+  AuthUser,
+  getOAuthConfig,
+  getPendingBooking,
+  clearPendingBooking
+} from '../services/authService';
 
 interface RegisterPageProps {
   onNavigate: (page: string, params?: any) => void;
@@ -44,6 +56,15 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
+  // OAuth States
+  const [oauthLoadingProvider, setOauthLoadingProvider] = useState<OAuthProvider | null>(null);
+  const [oauthUser, setOauthUser] = useState<AuthUser | null>(null);
+  const [oauthNotice, setOauthNotice] = useState<{
+    type: 'error' | 'cancel' | 'info';
+    message: string;
+    provider?: OAuthProvider;
+  } | null>(null);
+
   const calculatePasswordStrength = (pass: string) => {
     if (!pass) return 0;
     let score = 0;
@@ -56,9 +77,20 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({
 
   const passStrength = calculatePasswordStrength(password);
 
+  const pendingBooking = getPendingBooking();
+
   const proceedToBooking = (userName?: string, userEmail?: string) => {
+    const pending = getPendingBooking();
     onNavigate(redirectTo || 'booking', {
       ...initialParams,
+      ...(pending
+        ? {
+            selectedSeatId: pending.seatId,
+            selectedZone: pending.zone,
+            preselectedCart: pending.cart,
+            initialLocation: pending.location
+          }
+        : {}),
       customerName: userName || fullName || 'Member',
       customerEmail: userEmail || email || 'member@celpin.com'
     });
@@ -67,6 +99,7 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg('');
+    setOauthNotice(null);
 
     if (authMode === 'register') {
       if (!fullName.trim()) {
@@ -99,7 +132,7 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({
       try {
         localStorage.setItem(
           'celpin_user',
-          JSON.stringify({ name: fullName || 'Member', email, phone })
+          JSON.stringify({ name: fullName || 'Member', email, phone, provider: 'email' })
         );
       } catch {}
       // Auto-forward to booking after brief confirmation
@@ -109,26 +142,47 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({
     }, 600);
   };
 
-  const handleSocialAuth = (provider: 'google' | 'linkedin') => {
-    setIsSubmitting(true);
-    const mockName = provider === 'google' ? 'Google User' : 'LinkedIn Member';
-    const mockEmail = provider === 'google' ? 'user@gmail.com' : 'user@linkedin.com';
-    setFullName(mockName);
-    setEmail(mockEmail);
+  const handleSocialAuth = async (provider: OAuthProvider) => {
+    setErrorMsg('');
+    setOauthNotice(null);
+    setOauthLoadingProvider(provider);
 
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-      try {
-        localStorage.setItem(
-          'celpin_user',
-          JSON.stringify({ name: mockName, email: mockEmail })
-        );
-      } catch {}
-      setTimeout(() => {
-        proceedToBooking(mockName, mockEmail);
-      }, 1400);
-    }, 600);
+    try {
+      const result = await signInWithOAuth(provider);
+      setOauthLoadingProvider(null);
+
+      if (result.success) {
+        setOauthUser(result.user);
+        setFullName(result.user.name);
+        setEmail(result.user.email);
+        setIsSuccess(true);
+
+        setTimeout(() => {
+          proceedToBooking(result.user.name, result.user.email);
+        }, 1600);
+      } else {
+        if (result.cancelled) {
+          setOauthNotice({
+            type: 'cancel',
+            message: result.error || 'Sign-in cancelled. You closed the authentication window.',
+            provider
+          });
+        } else {
+          setOauthNotice({
+            type: 'error',
+            message: result.error || 'Authentication failed. Please try again.',
+            provider
+          });
+        }
+      }
+    } catch (err: any) {
+      setOauthLoadingProvider(null);
+      setOauthNotice({
+        type: 'error',
+        message: err?.message || 'An unexpected error occurred during sign in. Please try again.',
+        provider
+      });
+    }
   };
 
   return (
@@ -254,28 +308,67 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({
                       {authMode === 'register' ? 'Welcome to Celpin!' : 'Welcome Back!'}
                     </h2>
                     <p className="mt-2 text-sm text-muted-foreground max-w-md mx-auto">
-                      {authMode === 'register'
+                      {oauthUser
+                        ? `You have securely authenticated with ${oauthUser.provider === 'google' ? 'Google' : 'LinkedIn'}. Your session is active.`
+                        : authMode === 'register'
                         ? 'Your membership account is ready. Your complimentary welcome pass has been applied to your profile.'
                         : 'You have signed in successfully. Ready to book your next workspace?'}
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-muted/40 border border-border/80 max-w-sm mx-auto text-left text-xs space-y-2">
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Account:</span>
-                      <span className="font-semibold text-foreground">{email || 'member@celpin.com'}</span>
+                  {/* Profile & Session Card */}
+                  <div className="p-4 rounded-2xl bg-muted/40 border border-border/80 max-w-sm mx-auto text-left text-xs space-y-2.5">
+                    {oauthUser?.avatarUrl && (
+                      <div className="flex items-center gap-3 pb-2 border-b border-border/60">
+                        <img
+                          src={oauthUser.avatarUrl}
+                          alt={oauthUser.name}
+                          className="w-10 h-10 rounded-full border border-border/80 object-cover"
+                        />
+                        <div>
+                          <div className="font-bold text-foreground text-sm">{oauthUser.name}</div>
+                          <div className="text-[11px] text-muted-foreground capitalize">
+                            Authenticated via {oauthUser.provider}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="flex justify-between items-center">
+                      <span className="text-muted-foreground">Account Email:</span>
+                      <span className="font-semibold text-foreground">{email || oauthUser?.email || 'member@celpin.com'}</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Status:</span>
+
+                    <div className="flex justify-between items-center">
+                      <span className="text-muted-foreground">Auth Provider:</span>
+                      <span className="font-medium text-foreground capitalize flex items-center gap-1.5">
+                        {oauthUser ? (
+                          oauthUser.provider === 'google' ? (
+                            <span className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 dark:text-blue-400">
+                              Google OAuth 2.0
+                            </span>
+                          ) : (
+                            <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#0A66C2]">
+                              LinkedIn OpenID
+                            </span>
+                          )
+                        ) : (
+                          'Email & Password'
+                        )}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between items-center">
+                      <span className="text-muted-foreground">Session Status:</span>
                       <span className="font-semibold text-success flex items-center gap-1">
-                        <CheckCircle2 className="h-3.5 w-3.5" /> Verified Active
+                        <CheckCircle2 className="h-3.5 w-3.5" /> Verified &amp; Active
                       </span>
                     </div>
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
                     <button
-                      onClick={() => proceedToBooking()}
+                      onClick={() => proceedToBooking(oauthUser?.name, oauthUser?.email)}
                       className="inline-flex items-center justify-center font-medium bg-primary text-primary-foreground hover:bg-primary/90 h-12 px-7 rounded-xl shadow-md hover:shadow-lg transition-all gap-2 cursor-pointer"
                     >
                       <span>Proceed to Book Workspace</span>
@@ -302,6 +395,7 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({
                         onClick={() => {
                           setAuthMode('register');
                           setErrorMsg('');
+                          setOauthNotice(null);
                         }}
                         className={`text-lg font-bold pb-1 transition-colors cursor-pointer relative focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-t-sm ${
                           authMode === 'register'
@@ -322,6 +416,7 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({
                         onClick={() => {
                           setAuthMode('login');
                           setErrorMsg('');
+                          setOauthNotice(null);
                         }}
                         className={`text-lg font-bold pb-1 transition-colors cursor-pointer relative focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-t-sm ${
                           authMode === 'login'
@@ -341,51 +436,138 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({
                     </span>
                   </div>
 
-                  {/* PROMINENT SOCIAL SIGNUP BUTTONS (GOOGLE & LINKEDIN) */}
+                  {/* PROMINENT, CONSISTENT, ACCESSIBLE SOCIAL AUTH (GOOGLE & LINKEDIN) */}
                   <div className="space-y-3 mb-6">
+                    {/* OAuth Feedback Notice (Cancellation, Error, or Info) */}
+                    {oauthNotice && (
+                      <div
+                        role="alert"
+                        aria-live="polite"
+                        className={`p-3.5 rounded-xl text-xs font-medium flex items-start justify-between gap-3 animate-in fade-in duration-200 ${
+                          oauthNotice.type === 'cancel'
+                            ? 'bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-400'
+                            : 'bg-destructive/10 border border-destructive/20 text-destructive'
+                        }`}
+                      >
+                        <div className="flex items-start gap-2.5">
+                          <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
+                          <div>
+                            <p className="font-semibold">
+                              {oauthNotice.type === 'cancel' ? 'Sign-in Window Closed' : 'Sign-in Failed'}
+                            </p>
+                            <p className="mt-0.5 leading-relaxed">{oauthNotice.message}</p>
+                          </div>
+                        </div>
+
+                        {oauthNotice.provider && (
+                          <button
+                            type="button"
+                            onClick={() => handleSocialAuth(oauthNotice.provider!)}
+                            className="shrink-0 text-xs font-bold underline hover:opacity-80 cursor-pointer"
+                          >
+                            Try again
+                          </button>
+                        )}
+                      </div>
+                    )}
+
                     <div className="grid sm:grid-cols-2 gap-3">
                       {/* Google Button */}
                       <button
                         type="button"
+                        aria-label={
+                          oauthLoadingProvider === 'google'
+                            ? 'Signing in with Google...'
+                            : authMode === 'register'
+                            ? 'Sign up with Google'
+                            : 'Sign in with Google'
+                        }
+                        aria-busy={oauthLoadingProvider === 'google'}
+                        disabled={isSubmitting || oauthLoadingProvider !== null}
                         onClick={() => handleSocialAuth('google')}
-                        className="flex items-center justify-center gap-3 px-4 py-3 rounded-xl border border-border/80 bg-background hover:bg-muted/50 hover:border-primary/40 font-medium text-sm text-foreground transition-all shadow-xs cursor-pointer group"
+                        className={`relative flex items-center justify-center gap-3 px-4 py-3 rounded-xl border border-border/80 bg-background hover:bg-muted/50 hover:border-primary/40 font-medium text-sm text-foreground transition-all shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary ${
+                          oauthLoadingProvider === 'google'
+                            ? 'opacity-80 ring-2 ring-primary/40 cursor-wait'
+                            : oauthLoadingProvider !== null || isSubmitting
+                            ? 'opacity-50 cursor-not-allowed'
+                            : 'cursor-pointer hover:shadow-sm'
+                        }`}
                       >
-                        <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24">
-                          <path
-                            fill="#4285F4"
-                            d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"
-                          />
-                          <path
-                            fill="#34A853"
-                            d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.35 24 12 24z"
-                          />
-                          <path
-                            fill="#FBBC05"
-                            d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.17 0 9.99 0 12s.45 3.83 1.25 5.42l4.03-3.15z"
-                          />
-                          <path
-                            fill="#EA4335"
-                            d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.35 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"
-                          />
-                        </svg>
-                        <span>
-                          {authMode === 'register' ? 'Sign up with Google' : 'Sign in with Google'}
+                        {oauthLoadingProvider === 'google' ? (
+                          <Loader2 className="h-5 w-5 animate-spin text-primary shrink-0" />
+                        ) : (
+                          <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                              fill="#4285F4"
+                              d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"
+                            />
+                            <path
+                              fill="#34A853"
+                              d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.35 24 12 24z"
+                            />
+                            <path
+                              fill="#FBBC05"
+                              d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.17 0 9.99 0 12s.45 3.83 1.25 5.42l4.03-3.15z"
+                            />
+                            <path
+                              fill="#EA4335"
+                              d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.35 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"
+                            />
+                          </svg>
+                        )}
+                        <span className="truncate">
+                          {oauthLoadingProvider === 'google'
+                            ? 'Connecting to Google...'
+                            : authMode === 'register'
+                            ? 'Sign up with Google'
+                            : 'Sign in with Google'}
                         </span>
                       </button>
 
                       {/* LinkedIn Button */}
                       <button
                         type="button"
+                        aria-label={
+                          oauthLoadingProvider === 'linkedin'
+                            ? 'Signing in with LinkedIn...'
+                            : authMode === 'register'
+                            ? 'Sign up with LinkedIn'
+                            : 'Sign in with LinkedIn'
+                        }
+                        aria-busy={oauthLoadingProvider === 'linkedin'}
+                        disabled={isSubmitting || oauthLoadingProvider !== null}
                         onClick={() => handleSocialAuth('linkedin')}
-                        className="flex items-center justify-center gap-3 px-4 py-3 rounded-xl border border-border/80 bg-background hover:bg-muted/50 hover:border-primary/40 font-medium text-sm text-foreground transition-all shadow-xs cursor-pointer group"
+                        className={`relative flex items-center justify-center gap-3 px-4 py-3 rounded-xl border border-border/80 bg-background hover:bg-muted/50 hover:border-[#0A66C2]/40 font-medium text-sm text-foreground transition-all shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#0A66C2] ${
+                          oauthLoadingProvider === 'linkedin'
+                            ? 'opacity-80 ring-2 ring-[#0A66C2]/40 cursor-wait'
+                            : oauthLoadingProvider !== null || isSubmitting
+                            ? 'opacity-50 cursor-not-allowed'
+                            : 'cursor-pointer hover:shadow-sm'
+                        }`}
                       >
-                        <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="#0A66C2">
-                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                        </svg>
-                        <span>
-                          {authMode === 'register' ? 'Sign up with LinkedIn' : 'Sign in with LinkedIn'}
+                        {oauthLoadingProvider === 'linkedin' ? (
+                          <Loader2 className="h-5 w-5 animate-spin text-[#0A66C2] shrink-0" />
+                        ) : (
+                          <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="#0A66C2" aria-hidden="true">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                          </svg>
+                        )}
+                        <span className="truncate">
+                          {oauthLoadingProvider === 'linkedin'
+                            ? 'Connecting to LinkedIn...'
+                            : authMode === 'register'
+                            ? 'Sign up with LinkedIn'
+                            : 'Sign in with LinkedIn'}
                         </span>
                       </button>
+                    </div>
+
+                    {/* Trust & Privacy Assurance Microcopy */}
+                    <div className="flex items-center justify-center gap-1.5 text-[11px] text-muted-foreground pt-1">
+                      <ShieldCheck className="h-3.5 w-3.5 text-primary shrink-0" />
+                      <span>
+                        Secure OAuth 2.0 flow: We never request or store your Google or LinkedIn password.
+                      </span>
                     </div>
                   </div>
 

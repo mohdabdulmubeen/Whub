@@ -4,7 +4,13 @@ import { App } from './App';
 import { I18nProvider } from './i18n/I18nContext';
 import { AccessibilityProvider } from './context/AccessibilityContext';
 import { AccessibilityToolbar } from './components/AccessibilityToolbar';
+import { handleOAuthCallbackIfPresent } from './services/authService';
 import './index.css';
+
+// Handle OAuth popup callback if this window was opened as an authentication popup
+if (handleOAuthCallbackIfPresent()) {
+  // Callback finished and popup posted message back to opener
+} else {
 
 class ErrorBoundary extends React.Component<
   { children: React.ReactNode },
@@ -63,3 +69,4 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     </ErrorBoundary>
   </React.StrictMode>
 );
+}

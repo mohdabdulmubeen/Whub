@@ -1,47 +1,65 @@
-import { useState } from 'react';
-
-// W-Hub Components & Pages
-import { WHubNavbar } from './components/WHubNavbar';
-import { WHubHomePage } from './pages/WHubHomePage';
-import { WHubFooter } from './components/WHubFooter';
-import { WHubChatWidget } from './components/WHubChatWidget';
-import { ApplicationModal } from './components/ApplicationModal';
+import React, { useState } from 'react';
+import { CelpinNavbar } from './components/CelpinNavbar';
+import { CelpinFooter } from './components/CelpinFooter';
+import { HomePage } from './pages/HomePage';
+import { BookingPage } from './pages/BookingPage';
+import { FloorMapPage } from './pages/FloorMapPage';
+import { CafePage } from './pages/CafePage';
+import { RewardsPage } from './pages/RewardsPage';
+import { ProposalPage } from './pages/ProposalPage';
+import { RegisterPage } from './pages/RegisterPage';
 
 export function App() {
-  const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
-  const [applyRole, setApplyRole] = useState<'startup' | 'mentor' | 'student'>('startup');
+  const [currentPage, setCurrentPage] = useState<string>('home');
+  const [params, setParams] = useState<any>({});
 
-  const handleOpenApply = (role: 'startup' | 'mentor' | 'student' = 'startup') => {
-    setApplyRole(role);
-    setIsApplyModalOpen(true);
-  };
-
-  const handleCloseApply = () => {
-    setIsApplyModalOpen(false);
+  const handleNavigate = (page: string, newParams?: any) => {
+    setCurrentPage(page);
+    if (newParams) {
+      setParams(newParams);
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fbfaf6] dark:bg-slate-950 text-slate-900 dark:text-white selection:bg-orange-500 selection:text-white transition-colors duration-200">
-      {/* W-Hub Global Navigation Bar */}
-      <WHubNavbar onOpenApply={handleOpenApply} />
+    <div className="min-h-screen flex flex-col bg-background text-foreground selection:bg-amber-600 selection:text-white">
+      {/* Celpin Official Navbar */}
+      <CelpinNavbar
+        currentPage={currentPage}
+        onNavigate={handleNavigate}
+      />
 
-      {/* Main W-Hub Experience */}
-      <main className="flex-1">
-        <WHubHomePage onOpenApply={handleOpenApply} />
+      {/* Main Pages */}
+      <main className="flex-1 pt-18 sm:pt-20">
+        {currentPage === 'home' && (
+          <HomePage onNavigate={handleNavigate} />
+        )}
+        {currentPage === 'booking' && (
+          <BookingPage
+            onNavigate={handleNavigate}
+            initialSeatId={params.selectedSeatId}
+            initialZone={params.selectedZone}
+            preselectedCart={params.preselectedCart}
+            initialLocation={params.initialLocation || params.location}
+            initialCustomerName={params.customerName}
+            initialCustomerEmail={params.customerEmail}
+          />
+        )}
+        {currentPage === 'floor-map' && <FloorMapPage onNavigate={handleNavigate} />}
+        {currentPage === 'cafe' && <CafePage onNavigate={handleNavigate} />}
+        {currentPage === 'rewards' && <RewardsPage onNavigate={handleNavigate} />}
+        {currentPage === 'proposal' && <ProposalPage />}
+        {currentPage === 'register' && (
+          <RegisterPage
+            onNavigate={handleNavigate}
+            redirectTo={params.redirectTo || 'booking'}
+            initialParams={params}
+          />
+        )}
       </main>
 
-      {/* W-Hub Footer */}
-      <WHubFooter onOpenApply={handleOpenApply} />
-
-      {/* Floating Interactive W-Hub AI Assistant */}
-      <WHubChatWidget onOpenApply={handleOpenApply} />
-
-      {/* Application / Incubation Modal */}
-      <ApplicationModal
-        isOpen={isApplyModalOpen}
-        onClose={handleCloseApply}
-        defaultRole={applyRole}
-      />
+      {/* Celpin Official Footer */}
+      <CelpinFooter onNavigate={handleNavigate} />
     </div>
   );
 }

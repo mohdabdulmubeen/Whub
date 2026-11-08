@@ -1,3 +1,4 @@
+import { getActiveSession, getCurrentUser } from './authService';
 import { Seat, ZoneInfo, MenuItem, Booking, UserProfile, RewardItem, ActivityLog } from '../types';
 
 const API_BASE = '/api';
@@ -68,13 +69,37 @@ export const api = {
   },
 
   async createBooking(data: any): Promise<{ booking: Booking }> {
+    const session = getActiveSession();
+    const user = getCurrentUser();
+
+    if (!session && !user) {
+      throw new Error('Authentication required: You must be signed in to confirm a booking.');
+    }
+
+    const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+    if (session?.token) {
+      headers['Authorization'] = `Bearer ${session.token}`;
+    }
+    if (user?.email) {
+      headers['X-Celpin-User-Email'] = user.email;
+    }
+
+    const payload = {
+      ...data,
+      customerName: user?.name || data.customerName || 'Verified Member',
+      customerEmail: user?.email || data.customerEmail
+    };
+
     try {
       const res = await fetch(`${API_BASE}/bookings`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        headers,
+        body: JSON.stringify(payload)
       });
-      if (!res.ok) throw new Error('Failed to create booking');
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || 'Failed to create booking');
+      }
       return await res.json();
     } catch {
       const ref = `CEL-${Math.floor(100000 + Math.random() * 900000)}`;

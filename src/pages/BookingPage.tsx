@@ -10,12 +10,21 @@ import {
   ShieldCheck,
   CreditCard,
   Wallet,
-  CheckCircle2
+  CheckCircle2,
+  Lock
 } from 'lucide-react';
 import { api } from '../services/api';
 import { Seat, MenuItem, Booking, WorkspaceZone } from '../types';
 import { LocationSelectorBar, LocationSelection } from '../components/LocationSelectorBar';
 import { useI18n } from '../i18n/I18nContext';
+import { SignInRequiredModal } from '../components/SignInRequiredModal';
+import {
+  getCurrentUser,
+  getPendingBooking,
+  clearPendingBooking,
+  savePendingBooking,
+  AuthUser
+} from '../services/authService';
 export type { LocationSelection };
 
 interface BookingPageProps {
@@ -85,6 +94,26 @@ export const BookingPage: React.FC<BookingPageProps> = ({
   });
   const [bookingResult, setBookingResult] = useState<Booking | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
+  useEffect(() => {
+    const pending = getPendingBooking();
+    if (pending) {
+      if (pending.step) setStep(pending.step as 1 | 2 | 3);
+      if (pending.zone) setSelectedZone(pending.zone as WorkspaceZone);
+      if (pending.duration) setDuration(pending.duration);
+      if (pending.cart) setCart(pending.cart);
+      if (pending.preferences) setPreferences(pending.preferences);
+      if (pending.paymentMethod) setPaymentMethod(pending.paymentMethod as 'card' | 'upi');
+      if (pending.location) setLocation(pending.location);
+    }
+
+    const u = getCurrentUser();
+    if (u) {
+      setCustomerName(u.name);
+      setCustomerEmail(u.email);
+    }
+  }, []);
 
   useEffect(() => {
     if (initialCustomerName) setCustomerName(initialCustomerName);
@@ -172,6 +201,31 @@ export const BookingPage: React.FC<BookingPageProps> = ({
 
   const handleConfirmBooking = async () => {
     if (!selectedSeat) return;
+
+    // Check if user is currently authenticated
+    const currentUser = getCurrentUser();
+    if (!currentUser) {
+      // Preserve all entered booking details before prompting sign-in
+      savePendingBooking({
+        seatId: selectedSeat.id,
+        zone: selectedZone,
+        duration,
+        preferences,
+        cart,
+        location,
+        step: 3,
+        paymentMethod
+      });
+      setIsAuthModalOpen(true);
+      return;
+    }
+
+    // Signed-in user continues directly to confirmation
+    executeConfirmedBooking(currentUser);
+  };
+
+  const executeConfirmedBooking = async (user: AuthUser) => {
+    if (!selectedSeat) return;
     setIsSubmitting(true);
 
     const orderItems = Object.entries(cart).map(([id, qty]) => {
@@ -195,15 +249,41 @@ export const BookingPage: React.FC<BookingPageProps> = ({
         discount: 0,
         totalCost: grandTotal,
         orderItems,
-        customerName,
-        customerEmail
+        customerName: user.name,
+        customerEmail: user.email
       });
       setBookingResult(res.booking);
-    } catch {
-      // Fallback
+      clearPendingBooking();
+    } catch (err: any) {
+      if (err.message && err.message.toLowerCase().includes('authentication required')) {
+        setIsAuthModalOpen(true);
+      }
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleAuthSuccess = (authenticatedUser: AuthUser) => {
+    setIsAuthModalOpen(false);
+    setCustomerName(authenticatedUser.name);
+    setCustomerEmail(authenticatedUser.email);
+    executeConfirmedBooking(authenticatedUser);
+  };
+
+  const handleNavigateToRegister = () => {
+    if (selectedSeat) {
+      savePendingBooking({
+        seatId: selectedSeat.id,
+        zone: selectedZone,
+        duration,
+        preferences,
+        cart,
+        location,
+        step: 3,
+        paymentMethod
+      });
+    }
+    onNavigate('register');
   };
 
   const zonesList = [
@@ -785,6 +865,22 @@ export const BookingPage: React.FC<BookingPageProps> = ({
           </div>
         </div>
       </div>
+
+      {/* Sign-In Required Modal before booking confirmation */}
+      <SignInRequiredModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        onSuccess={handleAuthSuccess}
+        bookingSummary={{
+          seatName: selectedSeat?.name,
+          zoneName: selectedZone.toUpperCase(),
+          durationText: `${duration} Hours`,
+          totalAmount: grandTotal,
+          bookingType: 'HOURLY PASS',
+          dateText: location.date
+        }}
+        onNavigateToRegister={handleNavigateToRegister}
+      />
     </div>
   );
 };

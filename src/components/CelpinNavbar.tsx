@@ -1,16 +1,29 @@
-import React, { useState } from 'react';
-import { Menu, X, User } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Menu, X, User, LogOut } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { useI18n } from '../i18n/I18nContext';
+import { getCurrentUser, clearSession, AuthUser } from '../services/authService';
 
 interface NavbarProps {
   currentPage: string;
   onNavigate: (page: string, params?: any) => void;
+  onOpenListSpace?: () => void;
 }
 
 export const CelpinNavbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState<AuthUser | null>(null);
   const { t } = useI18n();
+
+  useEffect(() => {
+    setCurrentUser(getCurrentUser());
+  }, [currentPage]);
+
+  const handleSignOut = () => {
+    clearSession();
+    setCurrentUser(null);
+    onNavigate('home');
+  };
 
   const navLinks = [
     { id: 'home', labelKey: 'nav.home', defaultLabel: 'Home' },
@@ -68,15 +81,48 @@ export const CelpinNavbar: React.FC<NavbarProps> = ({ currentPage, onNavigate })
             {/* Theme Toggle */}
             <ThemeToggle />
 
-            {/* Member Sign In Button */}
-            <button
-              type="button"
-              onClick={() => onNavigate('register')}
-              className="hidden sm:inline-flex items-center gap-1.5 whitespace-nowrap text-xs font-semibold text-muted-foreground hover:text-foreground border border-border/80 bg-card/60 hover:bg-accent h-9 rounded-xl px-3.5 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-hidden"
-            >
-              <User className="h-3.5 w-3.5" />
-              <span>Sign In</span>
-            </button>
+            {/* Member Sign In / Account Dropdown */}
+            {currentUser ? (
+              <div className="hidden sm:flex items-center gap-1.5 bg-card/70 border border-border/80 rounded-xl p-1">
+                <button
+                  type="button"
+                  onClick={() => onNavigate('register')}
+                  className="inline-flex items-center gap-2 text-xs font-semibold hover:text-primary px-2.5 py-1 transition-colors cursor-pointer"
+                  title={`Signed in as ${currentUser.name} (${currentUser.email})`}
+                >
+                  {currentUser.avatarUrl ? (
+                    <img
+                      src={currentUser.avatarUrl}
+                      alt={currentUser.name}
+                      className="w-5 h-5 rounded-full object-cover border border-border"
+                    />
+                  ) : (
+                    <div className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center text-[10px] font-bold">
+                      {currentUser.name.charAt(0).toUpperCase()}
+                    </div>
+                  )}
+                  <span className="max-w-[90px] truncate">{currentUser.name}</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={handleSignOut}
+                  className="text-muted-foreground hover:text-destructive p-1 rounded-lg hover:bg-destructive/10 transition-colors cursor-pointer"
+                  title="Sign Out"
+                  aria-label="Sign Out"
+                >
+                  <LogOut className="h-3.5 w-3.5" />
+                </button>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => onNavigate('register')}
+                className="hidden sm:inline-flex items-center gap-1.5 whitespace-nowrap text-xs font-semibold text-muted-foreground hover:text-foreground border border-border/80 bg-card/60 hover:bg-accent h-9 rounded-xl px-3.5 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-hidden"
+              >
+                <User className="h-3.5 w-3.5" />
+                <span>Sign In</span>
+              </button>
+            )}
 
             {/* Primary Action Button - Direct Booking */}
             <button
@@ -124,16 +170,48 @@ export const CelpinNavbar: React.FC<NavbarProps> = ({ currentPage, onNavigate })
               );
             })}
 
-            <button
-              type="button"
-              onClick={() => {
-                onNavigate('register');
-                setMobileMenuOpen(false);
-              }}
-              className="block w-full text-left px-3.5 py-2.5 rounded-xl text-base font-medium text-muted-foreground hover:bg-accent hover:text-foreground transition-colors cursor-pointer"
-            >
-              Member Sign In / Account
-            </button>
+            {currentUser ? (
+              <div className="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-card border border-border">
+                <div className="flex items-center gap-2.5">
+                  {currentUser.avatarUrl ? (
+                    <img
+                      src={currentUser.avatarUrl}
+                      alt={currentUser.name}
+                      className="w-7 h-7 rounded-full object-cover border border-border"
+                    />
+                  ) : (
+                    <div className="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold">
+                      {currentUser.name.charAt(0).toUpperCase()}
+                    </div>
+                  )}
+                  <div>
+                    <p className="text-sm font-semibold leading-tight">{currentUser.name}</p>
+                    <p className="text-xs text-muted-foreground">{currentUser.email}</p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleSignOut();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="text-xs font-semibold text-destructive flex items-center gap-1 hover:underline cursor-pointer"
+                >
+                  <LogOut className="h-3.5 w-3.5" /> Sign Out
+                </button>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => {
+                  onNavigate('register');
+                  setMobileMenuOpen(false);
+                }}
+                className="block w-full text-left px-3.5 py-2.5 rounded-xl text-base font-medium text-muted-foreground hover:bg-accent hover:text-foreground transition-colors cursor-pointer"
+              >
+                Member Sign In / Account
+              </button>
+            )}
 
             <div className="pt-3 border-t border-border flex items-center justify-between gap-2 px-1">
               <button

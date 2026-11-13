@@ -1,4 +1,13 @@
 export type WorkspaceZone = 'quiet' | 'collaboration' | 'window' | 'premium';
+export type BookingDurationType = 'hourly' | 'alternate' | 'weekly' | 'monthly' | 'custom';
+
+export interface DateItem {
+  date: string;
+  dayName: string;
+  isWeekend: boolean;
+  isHoliday?: boolean;
+  holidayName?: string;
+}
 
 export interface Seat {
   id: string;
@@ -41,45 +50,71 @@ export interface Booking {
   bookingRef: string;
   seatId: string;
   zone: string;
+  bookingType: BookingDurationType;
+  startDate?: string;
+  endDate?: string;
+  startTime?: string;
   durationHours: number;
+  dates?: string[];
+  recurrenceDays?: string[];
+  termUnit?: string;
+  termCount?: number;
+  daysCount?: number;
   preferences: string[];
   seatCost: number;
   foodCost: number;
   discount: number;
   totalCost: number;
   dailyCapApplied: boolean;
+  itemizedBreakdown?: any;
   orderItems: { itemId: string; name: string; price: number; quantity: number }[];
   pin: string;
   qrCodeUrl: string;
   status: 'confirmed' | 'checked-in' | 'completed' | 'cancelled';
+  cancellationReason?: string;
   customerName: string;
   customerEmail: string;
   createdAt: string;
+  updatedAt?: string;
 }
 
-export interface UserProfile {
-  credits: number;
-  hoursBooked: number;
-  totalSaved: number;
-  freeCoffeesReady: number;
-  currentTier: 'Bronze' | 'Silver' | 'Gold' | 'Platinum';
-  lifetimePoints: number;
-  nextTierPoints: number;
+export interface PricingQuote {
+  bookingType: BookingDurationType;
+  zone: string;
+  hourlyRate: number;
+  dailyRate: number;
+  durationHours: number;
+  daysCount: number;
+  dates: string[];
+  dateItems: DateItem[];
+  rawSeatCost: number;
+  seatCost: number;
+  discount: number;
+  discountLabel: string;
+  dailyCapApplied: boolean;
+  foodCost: number;
+  taxes: number;
+  totalCost: number;
+  summaryText: string;
 }
 
-export interface RewardItem {
+export interface AvailabilityResult {
+  available: boolean;
+  requestedDatesCount: number;
+  availableDatesCount: number;
+  conflicts: { date: string; bookingRef: string; reason: string }[];
+  dateAvailability: Record<string, boolean>;
+  dateItems?: DateItem[];
+}
+
+export interface JobListing {
   id: string;
-  name: string;
-  description: string;
-  creditCost: number;
-  icon: string;
-}
-
-export interface ActivityLog {
-  id: string;
-  type: 'earned' | 'redeemed' | 'bonus';
   title: string;
-  credits: number;
-  description: string;
-  date: string;
+  department: string;
+  location: string;
+  type: 'Full-time' | 'Part-time' | 'Contract' | 'Internship' | string;
+  summary: string;
+  description?: string;
+  requirements?: string[];
+  postedDate?: string;
 }

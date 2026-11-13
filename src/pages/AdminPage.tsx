@@ -62,6 +62,18 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
     }
   };
 
+  const handleCancel = async (id: string, ref: string) => {
+    if (!confirm(`Are you sure you want to cancel booking ${ref}?`)) return;
+    try {
+      await api.cancelBooking(id, 'Admin cancellation');
+      setStatusMessage(`Cancelled booking ${ref} successfully`);
+      setTimeout(() => setStatusMessage(null), 3000);
+      fetchData();
+    } catch (e: any) {
+      alert(e.message || 'Failed to cancel booking');
+    }
+  };
+
   const handleUpdateSeatStatus = async (seatId: string, newStatus: 'available' | 'occupied' | 'reserved') => {
     try {
       await api.updateSeatStatus(seatId, newStatus);
@@ -266,8 +278,20 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                     filteredBookings.map((b) => (
                       <tr key={b.id} className="hover:bg-muted/30 transition-colors">
                         <td className="px-6 py-4">
-                          <div className="font-semibold text-foreground">{b.bookingRef}</div>
+                          <div className="font-semibold text-foreground flex items-center gap-2">
+                            <span>{b.bookingRef}</span>
+                            {b.bookingType && (
+                              <span className="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-muted text-muted-foreground border">
+                                {b.bookingType}
+                              </span>
+                            )}
+                          </div>
                           <div className="text-xs text-muted-foreground">{b.customerName} ({b.customerEmail})</div>
+                          {b.startDate && (
+                            <div className="text-[11px] text-muted-foreground mt-0.5 font-mono">
+                              {b.startDate}{b.endDate && b.endDate !== b.startDate ? ` → ${b.endDate}` : ''}
+                            </div>
+                          )}
                         </td>
                         <td className="px-6 py-4">
                           <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-xs font-semibold bg-primary/10 text-primary uppercase">
@@ -277,7 +301,15 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                         </td>
                         <td className="px-6 py-4">
                           <div className="font-medium text-foreground">₹{b.totalCost}</div>
-                          <div className="text-xs text-muted-foreground">{b.durationHours} hr(s)</div>
+                          <div className="text-xs text-muted-foreground">
+                            {b.bookingType === 'alternate'
+                              ? `${b.dates?.length || b.daysCount || 1} Alt Days`
+                              : b.bookingType === 'weekly'
+                              ? `${b.termCount || 1} Wk (${b.dates?.length || 7}d)`
+                              : b.bookingType === 'monthly'
+                              ? `${b.termCount || 1} Mo (${b.dates?.length || 30}d)`
+                              : `${b.durationHours || 2} hr(s)`}
+                          </div>
                         </td>
                         <td className="px-6 py-4">
                           <code className="text-xs px-2 py-1 rounded bg-muted font-mono font-bold tracking-widest text-amber-600 dark:text-amber-400">
@@ -288,24 +320,42 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                           <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${
                             b.status === 'checked-in'
                               ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20'
+                              : b.status === 'cancelled'
+                              ? 'bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20'
                               : 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20'
                           }`}>
-                            <span className={`w-1.5 h-1.5 rounded-full ${b.status === 'checked-in' ? 'bg-emerald-500' : 'bg-amber-500'}`} />
+                            <span className={`w-1.5 h-1.5 rounded-full ${
+                              b.status === 'checked-in' ? 'bg-emerald-500' : b.status === 'cancelled' ? 'bg-red-500' : 'bg-amber-500'
+                            }`} />
                             {b.status}
                           </span>
                         </td>
                         <td className="px-6 py-4 text-right">
-                          {b.status !== 'checked-in' ? (
-                            <button
-                              onClick={() => handleCheckIn(b.id, b.bookingRef)}
-                              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white transition-colors cursor-pointer"
-                            >
-                              <Check className="w-3.5 h-3.5" />
-                              <span>Check In</span>
-                            </button>
-                          ) : (
-                            <span className="text-xs text-muted-foreground font-medium">Verified</span>
-                          )}
+                          <div className="flex items-center justify-end gap-2">
+                            {b.status !== 'checked-in' && b.status !== 'cancelled' && (
+                              <>
+                                <button
+                                  onClick={() => handleCheckIn(b.id, b.bookingRef)}
+                                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white transition-colors cursor-pointer"
+                                >
+                                  <Check className="w-3.5 h-3.5" />
+                                  <span>Check In</span>
+                                </button>
+                                <button
+                                  onClick={() => handleCancel(b.id, b.bookingRef)}
+                                  className="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium rounded-lg border border-red-500/20 text-red-600 hover:bg-red-500/10 transition-colors cursor-pointer"
+                                >
+                                  Cancel
+                                </button>
+                              </>
+                            )}
+                            {b.status === 'checked-in' && (
+                              <span className="text-xs text-muted-foreground font-medium">Verified Active</span>
+                            )}
+                            {b.status === 'cancelled' && (
+                              <span className="text-xs text-red-500 font-medium">Cancelled</span>
+                            )}
+                          </div>
                         </td>
                       </tr>
                     ))
@@ -472,4 +522,3 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
     </div>
   );
 };
-

@@ -36,16 +36,20 @@ export const CelpinFooter: React.FC<FooterProps> = ({ onNavigate }) => {
             <h4 className="text-sm font-semibold mb-3 text-foreground">Explore</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <button onClick={() => onNavigate('register', { redirectTo: 'booking' })} className="hover:text-foreground transition-colors cursor-pointer">
-                  Book a Seat
+                <button onClick={() => onNavigate('booking')} className="hover:text-foreground transition-colors cursor-pointer">
+                  Book a seat
+                </button>
+              </li>
+              <li>
+                <button onClick={() => onNavigate('proposal')} className="hover:text-foreground transition-colors cursor-pointer">
+                  Enterprise Pass
                 </button>
               </li>
               <li>
                 <button onClick={() => onNavigate('register')} className="hover:text-foreground transition-colors cursor-pointer">
-                  Member Registration
+                  Member registration
                 </button>
               </li>
-              <li><span className="cursor-default">Pricing</span></li>
             </ul>
           </div>
 
@@ -53,9 +57,33 @@ export const CelpinFooter: React.FC<FooterProps> = ({ onNavigate }) => {
           <div>
             <h4 className="text-sm font-semibold mb-3 text-foreground">Company</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><span className="cursor-default">About Us</span></li>
-              <li><span className="cursor-default">Careers</span></li>
-              <li><span className="cursor-default">Contact</span></li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('about')}
+                  className="hover:text-foreground transition-colors cursor-pointer"
+                >
+                  About us
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('careers')}
+                  className="hover:text-foreground transition-colors cursor-pointer"
+                >
+                  Careers
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('admin')}
+                  className="hover:text-foreground transition-colors cursor-pointer text-xs opacity-75 hover:opacity-100"
+                >
+                  Admin Portal
+                </button>
+              </li>
             </ul>
           </div>
 

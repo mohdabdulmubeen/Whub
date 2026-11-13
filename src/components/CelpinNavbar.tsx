@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, User, LogOut } from 'lucide-react';
+import { Menu, X, User, LogOut, Bell, Building2 } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { useI18n } from '../i18n/I18nContext';
 import { getCurrentUser, clearSession, AuthUser } from '../services/authService';
+import { useNotifications } from '../context/NotificationContext';
 
 interface NavbarProps {
   currentPage: string;
@@ -10,10 +11,11 @@ interface NavbarProps {
   onOpenListSpace?: () => void;
 }
 
-export const CelpinNavbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
+export const CelpinNavbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenListSpace }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState<AuthUser | null>(null);
   const { t } = useI18n();
+  const { unreadCount, setIsDrawerOpen } = useNotifications();
 
   useEffect(() => {
     setCurrentUser(getCurrentUser());
@@ -76,10 +78,38 @@ export const CelpinNavbar: React.FC<NavbarProps> = ({ currentPage, onNavigate })
             })}
           </div>
 
-          {/* Right Actions: Clean & Minimal (Theme Toggle, Member Sign In, Book a Seat) */}
-          <div className="flex items-center gap-3">
+          {/* Right Actions: Clean & Minimal (Notifications, Theme Toggle, Member Sign In, List Space, Book a Seat) */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Notification Bell */}
+            <button
+              type="button"
+              onClick={() => setIsDrawerOpen(true)}
+              aria-label={`Notifications (${unreadCount} unread)`}
+              className="relative p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-accent/60 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-primary"
+              title="Notifications"
+            >
+              <Bell className="h-4 w-4" />
+              {unreadCount > 0 && (
+                <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[9px] font-bold text-primary-foreground shadow-xs animate-pulse">
+                  {unreadCount > 9 ? '9+' : unreadCount}
+                </span>
+              )}
+            </button>
+
             {/* Theme Toggle */}
             <ThemeToggle />
+
+            {/* List Your Space (Partner CTA) */}
+            {onOpenListSpace && (
+              <button
+                type="button"
+                onClick={onOpenListSpace}
+                className="hidden lg:inline-flex items-center gap-1.5 whitespace-nowrap text-xs font-semibold text-muted-foreground hover:text-foreground border border-border/80 bg-card/60 hover:bg-accent h-9 rounded-xl px-3 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-primary"
+              >
+                <Building2 className="h-3.5 w-3.5 text-muted-foreground" />
+                <span>List your space</span>
+              </button>
+            )}
 
             {/* Member Sign In / Account Dropdown */}
             {currentUser ? (
@@ -212,6 +242,39 @@ export const CelpinNavbar: React.FC<NavbarProps> = ({ currentPage, onNavigate })
                 Member Sign In / Account
               </button>
             )}
+
+            {onOpenListSpace && (
+              <button
+                type="button"
+                onClick={() => {
+                  onOpenListSpace();
+                  setMobileMenuOpen(false);
+                }}
+                className="flex items-center gap-2 w-full text-left px-3.5 py-2.5 rounded-xl text-base font-medium text-muted-foreground hover:bg-accent hover:text-foreground transition-colors cursor-pointer"
+              >
+                <Building2 className="h-4 w-4" />
+                <span>List your space</span>
+              </button>
+            )}
+
+            <button
+              type="button"
+              onClick={() => {
+                setIsDrawerOpen(true);
+                setMobileMenuOpen(false);
+              }}
+              className="flex items-center justify-between w-full text-left px-3.5 py-2.5 rounded-xl text-base font-medium text-muted-foreground hover:bg-accent hover:text-foreground transition-colors cursor-pointer"
+            >
+              <div className="flex items-center gap-2">
+                <Bell className="h-4 w-4" />
+                <span>Notifications</span>
+              </div>
+              {unreadCount > 0 && (
+                <span className="px-2 py-0.5 rounded-full bg-primary text-xs font-bold text-primary-foreground">
+                  {unreadCount}
+                </span>
+              )}
+            </button>
 
             <div className="pt-3 border-t border-border flex items-center justify-between gap-2 px-1">
               <button

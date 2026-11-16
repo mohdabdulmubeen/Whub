@@ -79,7 +79,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({
   const [isManageModalOpen, setIsManageModalOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
-  // 4K Café Interior Preview Modal
+  // 4K Cafe Interior Preview Modal
   const [previewModalCafe, setPreviewModalCafe] = useState<CafeOption | null>(null);
 
   const todayStr = useMemo(() => new Date().toISOString().split('T')[0], []);
@@ -90,8 +90,8 @@ export const BookingPage: React.FC<BookingPageProps> = ({
       state: 'Telangana',
       city: 'Warangal',
       date: todayStr,
-      cafe: 'Heritage Café',
-      cafeDesk: 'Heritage Café'
+      cafe: 'Heritage Cafe',
+      cafeDesk: 'Heritage Cafe'
     }
   );
 
@@ -171,20 +171,116 @@ export const BookingPage: React.FC<BookingPageProps> = ({
   // Sync date when LocationSelectorBar changes date
   useEffect(() => {
     if (location.date) {
-      setWeeklyStartDate(location.date);
-      setMonthlyStartDate(location.date);
-      setCustomStartDate(location.date);
-      if (location.endDate) {
-        setCustomEndDate(location.endDate);
-        setWeeklyEndDate(location.endDate);
-        setMonthlyEndDate(location.endDate);
+      const locStart = location.date;
+      const locEnd = location.endDate || location.date;
+      const locDays = getDaysDifference(locStart, locEnd);
+
+      setCustomStartDate(locStart);
+      setCustomEndDate(locEnd);
+      setWeeklyStartDate(locStart);
+      setWeeklyEndDate(addDays(locStart, 6));
+      setMonthlyStartDate(locStart);
+      setMonthlyEndDate(addDays(locStart, 29));
+
+      // Predefined plans appear only when the selected days exactly match the predefined duration.
+      // Any other day selection (e.g. 2 days, 4 days) automatically falls under Custom.
+      if (locDays === 7) {
+        setBookingType('weekly');
+      } else if (locDays === 30) {
+        setBookingType('monthly');
+      } else if (locDays === 1) {
+        if (bookingType !== 'hourly' && bookingType !== 'custom') {
+          setBookingType('hourly');
+        }
       } else {
-        setWeeklyEndDate(addDays(location.date, weeklyTermCount * 7 - 1));
-        setMonthlyEndDate(addDays(location.date, monthlyTermCount * 30 - 1));
-        setCustomEndDate(addDays(location.date, 2));
+        setBookingType('custom');
       }
     }
   }, [location.date, location.endDate]);
+
+  // Enforce strict 7-day range for Weekly mode: starts on weeklyStartDate, ends 6 days later
+  useEffect(() => {
+    if (bookingType === 'weekly') {
+      const fixedWeeklyEnd = addDays(weeklyStartDate, 6);
+      if (weeklyEndDate !== fixedWeeklyEnd) {
+        setWeeklyEndDate(fixedWeeklyEnd);
+      }
+      if (weeklyTermCount !== 1) {
+        setWeeklyTermCount(1);
+      }
+    }
+  }, [bookingType, weeklyStartDate, weeklyEndDate, weeklyTermCount]);
+
+  // Active selected dates and days count
+  const activeSelectedRange = useMemo(() => {
+    let start = location.date || todayStr;
+    let end = start;
+
+    if (bookingType === 'hourly') {
+      start = location.date || todayStr;
+      end = start;
+    } else if (bookingType === 'weekly') {
+      start = weeklyStartDate;
+      end = weeklyEndDate || addDays(weeklyStartDate, 6);
+    } else if (bookingType === 'monthly') {
+      start = monthlyStartDate;
+      end = monthlyEndDate || addDays(monthlyStartDate, 29);
+    } else if (bookingType === 'custom') {
+      start = customStartDate;
+      end = customEndDate;
+    }
+
+    const days = Math.max(1, getDaysDifference(start, end));
+    return { start, end, days };
+  }, [bookingType, location.date, todayStr, weeklyStartDate, weeklyEndDate, monthlyStartDate, monthlyEndDate, customStartDate, customEndDate]);
+
+  // Predefined plans should appear only when selected days exactly match predefined duration.
+  // Any other day selection automatically falls under Custom.
+  useEffect(() => {
+    const days = activeSelectedRange.days;
+    if (days !== 1 && days !== 7 && days !== 30) {
+      if (bookingType !== 'custom') {
+        setBookingType('custom');
+      }
+    }
+  }, [activeSelectedRange.days, bookingType]);
+
+  // Available Duration Plans for Booking Summary
+  const availableDurationPlans = useMemo(() => {
+    const days = activeSelectedRange.days;
+    const plans: { value: BookingDurationType; label: string }[] = [];
+
+    // Predefined plans appear ONLY when the selected days exactly match the predefined duration
+    if (days === 1) {
+      plans.push({ value: 'hourly', label: 'Hourly' });
+    }
+
+    // Custom is always available (and is the ONLY plan for random combinations like 2 or 4 days)
+    plans.push({ value: 'custom', label: 'Custom' });
+
+    if (days === 7) {
+      plans.push({ value: 'weekly', label: 'Weekly' });
+    }
+
+    if (days === 30) {
+      plans.push({ value: 'monthly', label: 'Monthly' });
+    }
+
+    return plans;
+  }, [activeSelectedRange.days]);
+
+  const handleDurationPlanChange = (newType: BookingDurationType) => {
+    setBookingType(newType);
+    if (newType === 'weekly') {
+      setWeeklyStartDate(customStartDate);
+      setWeeklyEndDate(addDays(customStartDate, 6));
+    } else if (newType === 'monthly') {
+      setMonthlyStartDate(customStartDate);
+      setMonthlyEndDate(addDays(customStartDate, 29));
+    } else if (newType === 'hourly') {
+      setLocation(prev => ({ ...prev, date: customStartDate, endDate: customStartDate }));
+    }
+  };
 
   // Check for restored pending booking & authenticated user
   useEffect(() => {
@@ -242,8 +338,8 @@ export const BookingPage: React.FC<BookingPageProps> = ({
       endDate = startDate;
     } else if (bookingType === 'weekly') {
       startDate = weeklyStartDate;
-      endDate = weeklyEndDate;
-      termCount = weeklyTermCount;
+      endDate = addDays(weeklyStartDate, 6);
+      termCount = 1;
     } else if (bookingType === 'monthly') {
       startDate = monthlyStartDate;
       endDate = monthlyEndDate;
@@ -411,13 +507,13 @@ export const BookingPage: React.FC<BookingPageProps> = ({
       scheduleUnitsLabel = `${duration} hour${duration > 1 ? 's' : ''} (${startTime})`;
     } else if (bookingType === 'weekly') {
       const dailyRate = zoneRate.daily;
-      const daysCount = weeklyTermCount * 7;
+      const daysCount = 7;
       rawSeatCost = daysCount * dailyRate;
       discount = Math.round(rawSeatCost * 0.15); // 15% membership discount
       seatCost = rawSeatCost - discount;
       discountLabel = `15% weekly membership savings`;
       basePlanLabel = `Weekly pass (₹${dailyRate * 7}/wk)`;
-      scheduleUnitsLabel = `${weeklyTermCount} week${weeklyTermCount > 1 ? 's' : ''}`;
+      scheduleUnitsLabel = `1 week (7 days)`;
     } else if (bookingType === 'monthly') {
       const dailyRate = zoneRate.daily;
       const daysCount = monthlyTermCount * 30;
@@ -450,7 +546,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({
     if (serverQuote && serverQuote.bookingType === bookingType) {
       if (
         (bookingType === 'hourly' && serverQuote.durationHours === duration) ||
-        (bookingType === 'weekly' && Math.round(serverQuote.daysCount / 7) === weeklyTermCount) ||
+        (bookingType === 'weekly' && (serverQuote.daysCount === 7 || Math.round(serverQuote.daysCount / 7) === 1)) ||
         (bookingType === 'monthly' && Math.round(serverQuote.daysCount / 30) === monthlyTermCount)
       ) {
         rawSeatCost = serverQuote.rawSeatCost;
@@ -774,7 +870,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({
               <div>
                 <h2 className="text-xl font-semibold mb-1">{t('booking.selectWorkspace', 'Select your workspace')}</h2>
                 <p className="text-sm text-muted-foreground">
-                  Pick a workspace zone and reserve your seat at {location.cafe || location.cafeDesk || 'the selected café'}.
+                  Pick a workspace zone and reserve your seat at {location.cafe || location.cafeDesk || 'the selected cafe'}.
                 </p>
               </div>
 
@@ -1018,10 +1114,10 @@ export const BookingPage: React.FC<BookingPageProps> = ({
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-border/60 gap-2">
                       <div>
                         <h3 className="font-bold text-sm text-foreground">Custom date-range pass</h3>
-                        <p className="text-xs text-muted-foreground">Select your exact check-in and check-out dates on the calendar</p>
+                        <p className="text-xs text-muted-foreground">Select your exact check-in and check-out dates freely on the calendar without any seven-day restriction</p>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
+                        <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
                           {getDaysDifference(customStartDate, customEndDate)} Day{getDaysDifference(customStartDate, customEndDate) > 1 ? 's' : ''} Selected
                         </span>
                         {getDaysDifference(customStartDate, customEndDate) >= 7 && (
@@ -1036,20 +1132,25 @@ export const BookingPage: React.FC<BookingPageProps> = ({
                       startDate={customStartDate}
                       endDate={customEndDate}
                       minDate={todayStr}
-                      mode="range"
+                      mode="custom"
                       showPresets={true}
                       inline={true}
                       onChange={range => {
                         setCustomStartDate(range.startDate);
                         setCustomEndDate(range.endDate);
+                        setLocation(prev => ({
+                          ...prev,
+                          date: range.startDate,
+                          endDate: range.endDate
+                        }));
                       }}
                       className="border border-border/80"
                     />
 
-                    <div className="p-3 rounded-xl bg-muted/40 border border-border text-xs text-muted-foreground flex items-center gap-2">
-                      <Sparkles className="w-4 h-4 text-primary shrink-0" />
+                    <div className="p-3 rounded-xl bg-blue-500/10 border border-blue-500/20 text-xs text-blue-900 dark:text-blue-200 flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
                       <span>
-                        Active range: <strong>{formatRangeSummary(customStartDate, customEndDate)}</strong>. Billed at flexible daily rate ₹{zoneRate.daily}/day with progressive discounts.
+                        Custom Mode: Active range <strong>{formatRangeSummary(customStartDate, customEndDate)}</strong>. You can choose any dates freely without the seven-day restriction.
                       </span>
                     </div>
                   </div>
@@ -1061,7 +1162,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({
                     <div className="flex items-center justify-between pb-3 border-b border-border/60">
                       <div>
                         <h3 className="font-bold text-sm text-foreground">Weekly coworking membership pass</h3>
-                        <p className="text-xs text-muted-foreground">Full weekly all-inclusive access</p>
+                        <p className="text-xs text-muted-foreground">Fixed 7-day pass starting on chosen start date and ending 6 days later</p>
                       </div>
                       <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-600 border border-purple-500/20">
                         15% weekly pass discount
@@ -1077,12 +1178,11 @@ export const BookingPage: React.FC<BookingPageProps> = ({
                           startDate={weeklyStartDate}
                           endDate={weeklyEndDate}
                           minDate={todayStr}
-                          mode="range"
+                          mode="weekly"
                           onChange={range => {
                             setWeeklyStartDate(range.startDate);
                             setWeeklyEndDate(range.endDate);
-                            const weeks = Math.max(1, Math.round(range.daysCount / 7));
-                            setWeeklyTermCount(weeks);
+                            setWeeklyTermCount(1);
                           }}
                           buttonClassName="py-2 text-sm"
                         />
@@ -1090,30 +1190,24 @@ export const BookingPage: React.FC<BookingPageProps> = ({
 
                       <div>
                         <label className="block text-xs font-semibold uppercase text-muted-foreground mb-1.5">
-                          Booking Term (Weeks)
+                          Booking Term
                         </label>
-                        <select
-                          value={weeklyTermCount}
-                          onChange={e => {
-                            const count = Number(e.target.value);
-                            setWeeklyTermCount(count);
-                            setWeeklyEndDate(addDays(weeklyStartDate, count * 7 - 1));
-                          }}
-                          className="w-full bg-background border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:ring-2 focus:ring-primary/20"
-                        >
-                          {[1, 2, 3, 4, 8].map(w => (
-                            <option key={w} value={w}>
-                              {w} week{w > 1 ? 's' : ''} ({w * 7} days)
-                            </option>
-                          ))}
-                        </select>
+                        <div className="h-[42px] px-3.5 py-2 bg-muted/40 border border-border rounded-xl text-xs flex items-center justify-between text-foreground">
+                          <div className="flex items-center gap-2">
+                            <CalendarRange className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                            <span className="font-bold">1 Week (7 Days)</span>
+                          </div>
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-500/15 text-purple-700 dark:text-purple-300">
+                            Strict 7-Day Range
+                          </span>
+                        </div>
                       </div>
                     </div>
 
-                    <div className="p-3 rounded-xl bg-muted/40 border border-border text-xs text-muted-foreground flex items-center gap-2">
-                      <Info className="w-4 h-4 text-primary shrink-0" />
+                    <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 text-xs text-purple-900 dark:text-purple-200 flex items-center gap-2">
+                      <Info className="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0" />
                       <span>
-                        Active dates: <strong>{formatRangeSummary(weeklyStartDate, weeklyEndDate)}</strong> with 15% membership discount applied.
+                        Weekly Pass: <strong>{formatRangeSummary(weeklyStartDate, weeklyEndDate)}</strong> (strictly 7 days, ending 6 days after start date). Dates outside this range cannot be selected. For other durations, switch to <strong>Custom Range</strong>.
                       </span>
                     </div>
                   </div>
@@ -1533,12 +1627,12 @@ export const BookingPage: React.FC<BookingPageProps> = ({
           <div className="rounded-2xl border border-border bg-card shadow-sm sticky top-24 p-6 space-y-4">
             <h3 className="font-semibold tracking-tight text-lg">{t('booking.summary', 'Booking summary')}</h3>
 
-            {/* Selected Café in Booking Summary */}
+            {/* Selected Cafe in Booking Summary */}
             <div className="flex justify-between items-start pb-2.5 border-b border-border/60 text-sm">
-              <span className="text-muted-foreground">Selected Café</span>
+              <span className="text-muted-foreground">Selected Cafe</span>
               <div className="text-right">
                 <p className="font-semibold text-foreground text-sm">
-                  {location.cafe || location.cafeDesk || 'Heritage Café'}
+                  {location.cafe || location.cafeDesk || 'Heritage Cafe'}
                 </p>
                 <p className="text-xs text-muted-foreground mt-0.5">
                   {location.city}, {location.state}
@@ -1578,13 +1672,14 @@ export const BookingPage: React.FC<BookingPageProps> = ({
                   <select
                     id="summary-duration-plan"
                     value={bookingType}
-                    onChange={(e) => setBookingType(e.target.value as BookingDurationType)}
+                    onChange={(e) => handleDurationPlanChange(e.target.value as BookingDurationType)}
                     className="bg-muted/70 hover:bg-muted border border-border rounded-lg px-2.5 py-1 text-xs font-bold text-primary focus:outline-hidden focus:ring-2 focus:ring-primary/20 cursor-pointer transition-colors"
                   >
-                    <option value="hourly" className="bg-card text-foreground">Hourly</option>
-                    <option value="custom" className="bg-card text-foreground">Custom Range</option>
-                    <option value="weekly" className="bg-card text-foreground">Weekly</option>
-                    <option value="monthly" className="bg-card text-foreground">Monthly</option>
+                    {availableDurationPlans.map(plan => (
+                      <option key={plan.value} value={plan.value} className="bg-card text-foreground">
+                        {plan.label}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
@@ -1617,22 +1712,9 @@ export const BookingPage: React.FC<BookingPageProps> = ({
                       {getDaysDifference(customStartDate, customEndDate)} Days
                     </span>
                   ) : bookingType === 'weekly' ? (
-                    <select
-                      id="summary-duration-units"
-                      value={weeklyTermCount}
-                      onChange={(e) => {
-                        const count = Number(e.target.value);
-                        setWeeklyTermCount(count);
-                        setWeeklyEndDate(addDays(weeklyStartDate, count * 7 - 1));
-                      }}
-                      className="bg-muted/70 hover:bg-muted border border-border rounded-lg px-2 py-0.5 text-xs font-bold text-foreground focus:outline-hidden focus:ring-2 focus:ring-primary/20 cursor-pointer transition-colors"
-                    >
-                      {[1, 2, 3, 4, 8].map(w => (
-                        <option key={w} value={w} className="bg-card text-foreground">
-                          {w} week{w > 1 ? 's' : ''}
-                        </option>
-                      ))}
-                    </select>
+                    <span className="text-xs font-bold text-purple-600 dark:text-purple-400">
+                      1 Week (7 Days)
+                    </span>
                   ) : (
                     <select
                       id="summary-duration-units"
@@ -1679,7 +1761,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({
                 {/* Pre-ordered items */}
                 {foodCost > 0 && (
                   <div className="flex justify-between items-center pb-2 border-b border-border/60">
-                    <span className="text-muted-foreground">Café Pre-Orders</span>
+                    <span className="text-muted-foreground">Cafe Pre-Orders</span>
                     <span className="font-medium text-foreground">₹{foodCost}</span>
                   </div>
                 )}
@@ -1707,13 +1789,14 @@ export const BookingPage: React.FC<BookingPageProps> = ({
                   <select
                     id="unselected-duration-plan"
                     value={bookingType}
-                    onChange={(e) => setBookingType(e.target.value as BookingDurationType)}
+                    onChange={(e) => handleDurationPlanChange(e.target.value as BookingDurationType)}
                     className="bg-muted/70 hover:bg-muted border border-border rounded-lg px-2.5 py-1 text-xs font-bold text-primary focus:outline-hidden focus:ring-2 focus:ring-primary/20 cursor-pointer transition-colors"
                   >
-                    <option value="hourly" className="bg-card text-foreground">Hourly</option>
-                    <option value="custom" className="bg-card text-foreground">Custom Range</option>
-                    <option value="weekly" className="bg-card text-foreground">Weekly</option>
-                    <option value="monthly" className="bg-card text-foreground">Monthly</option>
+                    {availableDurationPlans.map(plan => (
+                      <option key={plan.value} value={plan.value} className="bg-card text-foreground">
+                        {plan.label}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <div className="flex justify-between items-center pb-2 border-b border-border/60 text-sm">

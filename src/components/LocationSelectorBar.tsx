@@ -45,7 +45,7 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
   Warangal: [
     {
       id: 'wgl-1',
-      name: 'Heritage Café',
+      name: 'Heritage Cafe',
       area: 'Subedari Collectorate Road, Warangal',
       address: 'Subedari Collectorate Road, Warangal',
       rating: '4.9',
@@ -55,25 +55,25 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
       layoutDescription: 'Zoned quiet area partitioned from the main barista counter, with universal power at all seats.',
       timing: '08:00 AM – 09:30 PM',
       amenities: ['300 Mbps Wi-Fi', 'Power at Desk', 'Quiet Acoustics', 'Coffee Service'],
-      coverPhoto: '/images/cafes/ccd-interior.webp',
+      coverPhoto: '/images/cafes/01_Heritage_Cafe_Subedari.webp',
       photos: [
         {
-          url: '/images/cafes/ccd-interior.webp',
+          url: '/images/cafes/01_Heritage_Cafe_Subedari.webp',
           category: 'Atmosphere',
           caption: 'Warm wooden interior, gentle acoustic panels, and calm ambient lighting'
         },
         {
-          url: '/images/cafes/concu-lounge.webp',
+          url: '/images/cafes/05_Kakatiya_Heritage_Roasters.webp',
           category: 'Seating',
           caption: 'Ergonomic workspace seating with individual universal power sockets'
         },
         {
-          url: '/images/cafes/niloufer-interior.jpg',
+          url: '/images/cafes/04_Bhadrakali_Lake_Cafe.jpg',
           category: 'Layout',
           caption: 'Spacious floor plan with partitioned quiet pods and team tables'
         },
         {
-          url: '/images/cafes/starbucks-interior.webp',
+          url: '/images/cafes/03_Urban_Roasters_MGM_Circle.webp',
           category: 'Barista Counter',
           caption: 'Artisanal espresso and single-origin pour-over brew bar'
         }
@@ -81,7 +81,7 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
     },
     {
       id: 'wgl-2',
-      name: 'Fort Road Café',
+      name: 'Fort Road Cafe',
       area: 'Fort Road, Warangal',
       address: 'Station Road near Fort Gate, Warangal',
       rating: '4.8',
@@ -91,25 +91,25 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
       layoutDescription: 'Open central work-floor flanked by acoustic booths and a mezzanine break area.',
       timing: '08:30 AM – 10:00 PM',
       amenities: ['High-Speed Wi-Fi', 'Standing Desks', 'Power Sockets', 'Bakery Menu'],
-      coverPhoto: '/images/cafes/roastery-interior.jpg',
+      coverPhoto: '/images/cafes/02_Fort_Road_Cafe.jpg',
       photos: [
         {
-          url: '/images/cafes/roastery-interior.jpg',
+          url: '/images/cafes/02_Fort_Road_Cafe.jpg',
           category: 'Atmosphere',
           caption: 'Exposed brick walls with contemporary industrial styling and natural airflow'
         },
         {
-          url: '/images/cafes/ccd-interior.webp',
+          url: '/images/cafes/01_Heritage_Cafe_Subedari.webp',
           category: 'Seating',
           caption: 'Focused pod workstations with adjustable desk lamps and deep surfaces'
         },
         {
-          url: '/images/cafes/niloufer-interior.jpg',
+          url: '/images/cafes/04_Bhadrakali_Lake_Cafe.jpg',
           category: 'Layout',
           caption: 'Wide collaborative open hall and ergonomic pair-programming desks'
         },
         {
-          url: '/images/cafes/starbucks-interior.webp',
+          url: '/images/cafes/03_Urban_Roasters_MGM_Circle.webp',
           category: 'Barista Counter',
           caption: 'Barista espresso counter with specialty iced beverages'
         }
@@ -122,30 +122,30 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
       address: 'MGM Circle Main Road, Warangal',
       rating: '4.8',
       reviewCount: 94,
-      atmosphereTag: 'Minimalist Nordic café aesthetic with Scandinavian oak furniture, plants, and natural daylight.',
+      atmosphereTag: 'Minimalist Nordic cafe aesthetic with Scandinavian oak furniture, plants, and natural daylight.',
       seatingTypes: ['Solid Oak Work Desks', 'Private Call Booths', 'Window Bar Seating', 'Executive Armchairs'],
       layoutDescription: 'Sunlit front bay for quiet thinkers and back lounge for pair programming and discussions.',
       timing: '08:00 AM – 09:00 PM',
       amenities: ['Gigabit Wi-Fi', 'Dual Sockets', 'Natural Lighting', 'Artisan Coffee'],
-      coverPhoto: '/images/cafes/starbucks-interior.webp',
+      coverPhoto: '/images/cafes/03_Urban_Roasters_MGM_Circle.webp',
       photos: [
         {
-          url: '/images/cafes/starbucks-interior.webp',
+          url: '/images/cafes/03_Urban_Roasters_MGM_Circle.webp',
           category: 'Atmosphere',
           caption: 'Contemporary roastery counter with artisanal single-origin brew station'
         },
         {
-          url: '/images/cafes/ccd-interior.webp',
+          url: '/images/cafes/01_Heritage_Cafe_Subedari.webp',
           category: 'Seating',
           caption: 'High-top laptop counters and ergonomic task seating with power docks'
         },
         {
-          url: '/images/cafes/concu-lounge.webp',
+          url: '/images/cafes/05_Kakatiya_Heritage_Roasters.webp',
           category: 'Layout',
           caption: 'Acoustic-treated open work zones with dedicated team tables'
         },
         {
-          url: '/images/cafes/roastery-interior.jpg',
+          url: '/images/cafes/02_Fort_Road_Cafe.jpg',
           category: 'Barista Counter',
           caption: 'Specialty in-house bean roaster and espresso station'
         }
@@ -153,7 +153,7 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
     },
     {
       id: 'wgl-4',
-      name: 'Bhadrakali Lake Café',
+      name: 'Bhadrakali Lake Cafe',
       area: 'Bhadrakali Lake, Warangal',
       address: 'Near Temple Promenade, Bhadrakali Lake Road, Warangal',
       rating: '4.9',
@@ -163,25 +163,25 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
       layoutDescription: 'Panoramic terrace facing the lake with quiet indoor focus pods and power at all seats.',
       timing: '07:30 AM – 09:30 PM',
       amenities: ['300 Mbps Wi-Fi', 'Lake View', 'Universal Outlets', 'Specialty Teas'],
-      coverPhoto: '/images/cafes/niloufer-interior.jpg',
+      coverPhoto: '/images/cafes/04_Bhadrakali_Lake_Cafe.jpg',
       photos: [
         {
-          url: '/images/cafes/niloufer-interior.jpg',
+          url: '/images/cafes/04_Bhadrakali_Lake_Cafe.jpg',
           category: 'Atmosphere',
           caption: 'Bright sunlit workspace hall with high ceilings and tranquil ambiance'
         },
         {
-          url: '/images/cafes/concu-lounge.webp',
+          url: '/images/cafes/05_Kakatiya_Heritage_Roasters.webp',
           category: 'Seating',
           caption: 'Comfortable bay seating and cushioned armchairs with garden views'
         },
         {
-          url: '/images/cafes/ccd-interior.webp',
+          url: '/images/cafes/01_Heritage_Cafe_Subedari.webp',
           category: 'Layout',
           caption: 'Open-concept layout with spacious collaborative tables'
         },
         {
-          url: '/images/cafes/starbucks-interior.webp',
+          url: '/images/cafes/03_Urban_Roasters_MGM_Circle.webp',
           category: 'Barista Counter',
           caption: 'Specialty cold brew and fresh organic herbal tea station'
         }
@@ -199,25 +199,25 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
       layoutDescription: 'Colonial vaulted ceiling with individual acoustic study nooks and high-speed fiber.',
       timing: '08:00 AM – 09:00 PM',
       amenities: ['Gigabit Wi-Fi', 'Heritage Ambience', 'Task Reading Lamps', 'Batch Brews'],
-      coverPhoto: '/images/cafes/concu-lounge.webp',
+      coverPhoto: '/images/cafes/05_Kakatiya_Heritage_Roasters.webp',
       photos: [
         {
-          url: '/images/cafes/concu-lounge.webp',
+          url: '/images/cafes/05_Kakatiya_Heritage_Roasters.webp',
           category: 'Atmosphere',
           caption: 'Colonial teakwood ceilings with heritage aesthetic and peaceful library vibe'
         },
         {
-          url: '/images/cafes/ccd-interior.webp',
+          url: '/images/cafes/01_Heritage_Cafe_Subedari.webp',
           category: 'Seating',
           caption: 'Deep solid wood workstations with warm task reading illumination'
         },
         {
-          url: '/images/cafes/niloufer-interior.jpg',
+          url: '/images/cafes/04_Bhadrakali_Lake_Cafe.jpg',
           category: 'Layout',
           caption: 'Zoned heritage study hall with acoustic wall dampening'
         },
         {
-          url: '/images/cafes/roastery-interior.jpg',
+          url: '/images/cafes/02_Fort_Road_Cafe.jpg',
           category: 'Barista Counter',
           caption: 'Artisanal espresso and batch brew counter with single-origin beans'
         }
@@ -235,25 +235,25 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
       layoutDescription: 'Modern technology workspace with zoned quiet benches and collaboration bays.',
       timing: '08:00 AM – 10:00 PM',
       amenities: ['300 Mbps Wi-Fi', 'Standing Desks', 'Dual Monitors', 'Protein Snacks'],
-      coverPhoto: '/images/cafes/ccd-interior.webp',
+      coverPhoto: '/images/cafes/06_Subedari_Tech_Lounge.webp',
       photos: [
         {
-          url: '/images/cafes/ccd-interior.webp',
+          url: '/images/cafes/06_Subedari_Tech_Lounge.webp',
           category: 'Atmosphere',
           caption: 'High-tech workspace with dual-screen developer desks and glass whiteboard walls'
         },
         {
-          url: '/images/cafes/starbucks-interior.webp',
+          url: '/images/cafes/03_Urban_Roasters_MGM_Circle.webp',
           category: 'Seating',
           caption: 'Ergonomic mesh chairs and motorized adjustable standing desk options'
         },
         {
-          url: '/images/cafes/concu-lounge.webp',
+          url: '/images/cafes/05_Kakatiya_Heritage_Roasters.webp',
           category: 'Layout',
           caption: 'Open tech lounge with private glass acoustic phone booths'
         },
         {
-          url: '/images/cafes/roastery-interior.jpg',
+          url: '/images/cafes/02_Fort_Road_Cafe.jpg',
           category: 'Barista Counter',
           caption: 'Nitro coffee on tap and high-protein wholesome snack pantry'
         }
@@ -263,7 +263,7 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
   Hanamkonda: [
     {
       id: 'hnk-1',
-      name: 'Nakkalagutta Café',
+      name: 'Nakkalagutta Cafe',
       area: 'Nakkalagutta, Hanamkonda',
       address: 'Near Nakkalagutta Junction, Hanamkonda',
       rating: '4.9',
@@ -273,25 +273,25 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
       layoutDescription: 'Linear pod configuration ensuring no direct glare on laptop screens.',
       timing: '08:00 AM – 09:30 PM',
       amenities: ['300 Mbps Wi-Fi', 'Acoustic Panels', 'Task Lamps', 'Espresso Bar'],
-      coverPhoto: '/images/cafes/concu-lounge.webp',
+      coverPhoto: '/images/cafes/1.webp',
       photos: [
         {
-          url: '/images/cafes/concu-lounge.webp',
+          url: '/images/cafes/5.webp',
           category: 'Atmosphere',
           caption: 'Crisp architectural interior with acoustic dampening panels'
         },
         {
-          url: '/images/cafes/ccd-interior.webp',
+          url: '/images/cafes/1.webp',
           category: 'Seating',
           caption: 'Ergonomic task chairs and individual acoustic reading pods'
         },
         {
-          url: '/images/cafes/niloufer-interior.jpg',
+          url: '/images/cafes/4.jpg',
           category: 'Layout',
           caption: 'Linear zoning ensuring glare-free laptop viewing throughout'
         },
         {
-          url: '/images/cafes/starbucks-interior.webp',
+          url: '/images/cafes/3.webp',
           category: 'Barista Counter',
           caption: 'Espresso craft bar with single-origin beans'
         }
@@ -299,35 +299,35 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
     },
     {
       id: 'hnk-2',
-      name: 'Kakatiya Café',
+      name: 'Kakatiya Cafe',
       area: 'KU Cross Road, Hanamkonda',
       address: 'Kakatiya University Road, Hanamkonda',
       rating: '4.8',
       reviewCount: 130,
-      atmosphereTag: 'Scholarly library café ambiance with book-lined shelves, warm brass reading lamps, and silent nooks.',
+      atmosphereTag: 'Scholarly library cafe ambiance with book-lined shelves, warm brass reading lamps, and silent nooks.',
       seatingTypes: ['Silent Focus Pods', 'Broad Study Tables', 'Window Lounge Chairs', 'Private Carrels'],
       layoutDescription: 'Library-inspired quiet reading wing with central discussion zone.',
       timing: '08:30 AM – 09:00 PM',
       amenities: ['High-Speed Wi-Fi', 'Book Nook', 'Brass Lamps', 'Power Outlets'],
-      coverPhoto: '/images/cafes/starbucks-interior.webp',
+      coverPhoto: '/images/cafes/2.jpg',
       photos: [
         {
-          url: '/images/cafes/starbucks-interior.webp',
+          url: '/images/cafes/3.webp',
           category: 'Atmosphere',
-          caption: 'Vibrant tech-enabled work café with abundant power points'
+          caption: 'Vibrant tech-enabled work cafe with abundant power points'
         },
         {
-          url: '/images/cafes/ccd-interior.webp',
+          url: '/images/cafes/1.webp',
           category: 'Seating',
           caption: 'High-top laptop benches and standing desks'
         },
         {
-          url: '/images/cafes/niloufer-interior.jpg',
+          url: '/images/cafes/4.jpg',
           category: 'Layout',
           caption: 'Central collaboration zone flanked by quiet focus pods'
         },
         {
-          url: '/images/cafes/roastery-interior.jpg',
+          url: '/images/cafes/2.jpg',
           category: 'Barista Counter',
           caption: 'Artisan coffee station with freshly roasted blends'
         }
@@ -335,7 +335,7 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
     },
     {
       id: 'hnk-3',
-      name: 'Public Gardens Café',
+      name: 'Public Gardens Cafe',
       area: 'Public Gardens Road, Hanamkonda',
       address: 'Public Gardens Commercial Strip, Hanamkonda',
       rating: '4.8',
@@ -345,25 +345,25 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
       layoutDescription: 'Indoor botanical atrium with perimeter desks facing verdant garden vistas.',
       timing: '08:00 AM – 09:30 PM',
       amenities: ['High-Speed Wi-Fi', 'Garden View', 'Quiet Bays', 'Coffee Delivery'],
-      coverPhoto: '/images/cafes/roastery-interior.jpg',
+      coverPhoto: '/images/cafes/3.webp',
       photos: [
         {
-          url: '/images/cafes/roastery-interior.jpg',
+          url: '/images/cafes/2.jpg',
           category: 'Atmosphere',
           caption: 'Heritage brick roastery ambiance with natural timber surfaces'
         },
         {
-          url: '/images/cafes/concu-lounge.webp',
+          url: '/images/cafes/5.webp',
           category: 'Seating',
           caption: 'Quiet library-style study booths with warm directional lamps'
         },
         {
-          url: '/images/cafes/niloufer-interior.jpg',
+          url: '/images/cafes/4.jpg',
           category: 'Layout',
           caption: 'Dual-wing layout dividing collaborative and silent work areas'
         },
         {
-          url: '/images/cafes/starbucks-interior.webp',
+          url: '/images/cafes/3.webp',
           category: 'Barista Counter',
           caption: 'Manual pour-over bar and specialty batch brews'
         }
@@ -381,25 +381,25 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
       layoutDescription: 'Split floor layout with private phone booths and quiet work zone.',
       timing: '08:00 AM – 09:00 PM',
       amenities: ['300 Mbps Wi-Fi', 'Executive Seating', 'AC', 'Coffee Bar'],
-      coverPhoto: '/images/cafes/niloufer-interior.jpg',
+      coverPhoto: '/images/cafes/4.jpg',
       photos: [
         {
-          url: '/images/cafes/niloufer-interior.jpg',
+          url: '/images/cafes/4.jpg',
           category: 'Atmosphere',
           caption: 'Lush botanical indoor greenery and sunlit glass pavilion'
         },
         {
-          url: '/images/cafes/concu-lounge.webp',
+          url: '/images/cafes/5.webp',
           category: 'Seating',
           caption: 'Ergonomic wicker and cushioned chairs overlooking garden landscape'
         },
         {
-          url: '/images/cafes/ccd-interior.webp',
+          url: '/images/cafes/1.webp',
           category: 'Layout',
           caption: 'Flow-through garden pavilion layout with natural breeze'
         },
         {
-          url: '/images/cafes/starbucks-interior.webp',
+          url: '/images/cafes/3.webp',
           category: 'Barista Counter',
           caption: 'Fresh fruit cold press bar and signature botanical teas'
         }
@@ -417,25 +417,25 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
       layoutDescription: 'Cozy work bays with universal sockets and soft background jazz.',
       timing: '08:30 AM – 09:30 PM',
       amenities: ['High-Speed Wi-Fi', 'Power at Desk', 'Artisan Coffee'],
-      coverPhoto: '/images/cafes/ccd-interior.webp',
+      coverPhoto: '/images/cafes/5.webp',
       photos: [
         {
-          url: '/images/cafes/ccd-interior.webp',
+          url: '/images/cafes/1.webp',
           category: 'Atmosphere',
           caption: 'Developer-centric innovation hub with dual-monitor ready workstations'
         },
         {
-          url: '/images/cafes/starbucks-interior.webp',
+          url: '/images/cafes/3.webp',
           category: 'Seating',
           caption: 'Ergonomic mesh chairs with adjustable lumbar and armrests'
         },
         {
-          url: '/images/cafes/concu-lounge.webp',
+          url: '/images/cafes/5.webp',
           category: 'Layout',
           caption: 'Open developer hall with soundproof breakout pods'
         },
         {
-          url: '/images/cafes/roastery-interior.jpg',
+          url: '/images/cafes/2.jpg',
           category: 'Barista Counter',
           caption: 'Continuous high-caffeine cold brews and wholesome nutrition station'
         }
@@ -443,7 +443,7 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
     },
     {
       id: 'hnk-6',
-      name: 'Balasamudram WorkCafé',
+      name: 'Balasamudram WorkCafe',
       area: 'Balasamudram, Hanamkonda',
       address: 'Court Road, Balasamudram, Hanamkonda',
       rating: '4.8',
@@ -453,25 +453,25 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
       layoutDescription: 'Wide personal desks with acoustic divider panels for uninterrupted work.',
       timing: '08:00 AM – 09:30 PM',
       amenities: ['Fiber Wi-Fi', 'Quiet Pods', 'Power Outlets', 'Coffee Taps'],
-      coverPhoto: '/images/cafes/concu-lounge.webp',
+      coverPhoto: '/images/cafes/6.webp',
       photos: [
         {
-          url: '/images/cafes/concu-lounge.webp',
+          url: '/images/cafes/5.webp',
           category: 'Atmosphere',
-          caption: 'Peaceful residential boutique café with warm neighborhood warmth'
+          caption: 'Peaceful residential boutique cafe with warm neighborhood warmth'
         },
         {
-          url: '/images/cafes/ccd-interior.webp',
+          url: '/images/cafes/1.webp',
           category: 'Seating',
           caption: 'Deep cushioned reading armchairs and private corner desks'
         },
         {
-          url: '/images/cafes/niloufer-interior.jpg',
+          url: '/images/cafes/4.jpg',
           category: 'Layout',
           caption: 'Intimate multi-room cottage layout ensuring quiet privacy'
         },
         {
-          url: '/images/cafes/starbucks-interior.webp',
+          url: '/images/cafes/3.webp',
           category: 'Barista Counter',
           caption: 'Hand-poured filter coffee and fresh artisanal snacks'
         }
@@ -481,7 +481,7 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
   Kazipet: [
     {
       id: 'kzp-1',
-      name: 'Railway Station Café',
+      name: 'Railway Station Cafe',
       area: 'Station Square, Kazipet',
       address: 'Opp. Railway Station Terminal, Kazipet',
       rating: '4.8',
@@ -491,25 +491,25 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
       layoutDescription: 'Streamlined flow with grab-and-go bar and protected deep work lounge.',
       timing: '07:30 AM – 10:00 PM',
       amenities: ['Gigabit Wi-Fi', 'Soundproof Windows', 'Fast Charging', 'Quick Brews'],
-      coverPhoto: '/images/cafes/niloufer-interior.jpg',
+      coverPhoto: '/images/cafes/1.webp',
       photos: [
         {
-          url: '/images/cafes/niloufer-interior.jpg',
+          url: '/images/cafes/4.jpg',
           category: 'Atmosphere',
           caption: 'High-energy junction workspace with real-time transit status displays'
         },
         {
-          url: '/images/cafes/ccd-interior.webp',
+          url: '/images/cafes/1.webp',
           category: 'Seating',
           caption: 'Ergonomic task chairs and individual power docks at each seat'
         },
         {
-          url: '/images/cafes/concu-lounge.webp',
+          url: '/images/cafes/5.webp',
           category: 'Layout',
           caption: 'Zoned quiet lounge partitioned from transit circulation'
         },
         {
-          url: '/images/cafes/starbucks-interior.webp',
+          url: '/images/cafes/3.webp',
           category: 'Barista Counter',
           caption: 'Speedy barista counter with specialty filter coffee and breakfast'
         }
@@ -517,7 +517,7 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
     },
     {
       id: 'kzp-2',
-      name: 'NIT Campus Café',
+      name: 'NIT Campus Cafe',
       area: 'NIT Bypass Road, Kazipet',
       address: 'NIT Campus West Corridor, Kazipet',
       rating: '4.9',
@@ -527,25 +527,25 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
       layoutDescription: 'Spacious tech lab layout with dedicated engineering benches and silent study pods.',
       timing: '08:00 AM – 10:30 PM',
       amenities: ['300 Mbps Wi-Fi', 'Monitor Mounts', 'Whiteboard Walls', 'Coffee Taps'],
-      coverPhoto: '/images/cafes/ccd-interior.webp',
+      coverPhoto: '/images/cafes/2.jpg',
       photos: [
         {
-          url: '/images/cafes/ccd-interior.webp',
+          url: '/images/cafes/1.webp',
           category: 'Atmosphere',
           caption: 'Vibrant campus-adjacent innovation lounge with hackathon benches'
         },
         {
-          url: '/images/cafes/starbucks-interior.webp',
+          url: '/images/cafes/3.webp',
           category: 'Seating',
           caption: 'High-top collaboration benches and adjustable task chairs'
         },
         {
-          url: '/images/cafes/niloufer-interior.jpg',
+          url: '/images/cafes/4.jpg',
           category: 'Layout',
           caption: 'Open central tech floor flanked by private breakout rooms'
         },
         {
-          url: '/images/cafes/roastery-interior.jpg',
+          url: '/images/cafes/2.jpg',
           category: 'Barista Counter',
           caption: 'Nitro cold brew on tap and student-friendly value snacks'
         }
@@ -553,7 +553,7 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
     },
     {
       id: 'kzp-3',
-      name: 'Diesel Colony Café',
+      name: 'Diesel Colony Cafe',
       area: 'Diesel Colony, Kazipet',
       address: 'Diesel Colony Main Road, Kazipet',
       rating: '4.7',
@@ -563,25 +563,25 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
       layoutDescription: 'Compact and peaceful floor plan with private corners for focused solo work.',
       timing: '08:30 AM – 09:00 PM',
       amenities: ['Fiber Wi-Fi', 'Peaceful Ambience', 'Power Outlets', 'Garden Terrace'],
-      coverPhoto: '/images/cafes/roastery-interior.jpg',
+      coverPhoto: '/images/cafes/3.webp',
       photos: [
         {
-          url: '/images/cafes/roastery-interior.jpg',
+          url: '/images/cafes/2.jpg',
           category: 'Atmosphere',
           caption: 'Historic railway heritage brickwork with high timber truss ceilings'
         },
         {
-          url: '/images/cafes/concu-lounge.webp',
+          url: '/images/cafes/5.webp',
           category: 'Seating',
           caption: 'Vintage railway-inspired solo desks with individual reading lamps'
         },
         {
-          url: '/images/cafes/niloufer-interior.jpg',
+          url: '/images/cafes/4.jpg',
           category: 'Layout',
           caption: 'Spacious heritage workshop hall with acoustic quiet pods'
         },
         {
-          url: '/images/cafes/starbucks-interior.webp',
+          url: '/images/cafes/3.webp',
           category: 'Barista Counter',
           caption: 'Manual pour-over station and single-origin roast coffee'
         }
@@ -599,25 +599,25 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
       layoutDescription: 'Zoned workspace with dedicated laptop charging at all seats.',
       timing: '08:00 AM – 09:30 PM',
       amenities: ['300 Mbps Wi-Fi', 'Quiet Alcoves', 'Power Outlets', 'Espresso Bar'],
-      coverPhoto: '/images/cafes/starbucks-interior.webp',
+      coverPhoto: '/images/cafes/4.jpg',
       photos: [
         {
-          url: '/images/cafes/starbucks-interior.webp',
+          url: '/images/cafes/3.webp',
           category: 'Atmosphere',
           caption: 'Sunlit garden lounge with potted flora and calming ambient music'
         },
         {
-          url: '/images/cafes/ccd-interior.webp',
+          url: '/images/cafes/1.webp',
           category: 'Seating',
           caption: 'Ergonomic task chairs facing outdoor garden courtyard'
         },
         {
-          url: '/images/cafes/concu-lounge.webp',
+          url: '/images/cafes/5.webp',
           category: 'Layout',
           caption: 'Open-air breezeway layout connecting indoor and patio desks'
         },
         {
-          url: '/images/cafes/roastery-interior.jpg',
+          url: '/images/cafes/2.jpg',
           category: 'Barista Counter',
           caption: 'Cold-brew coffee and healthy organic breakfast bar'
         }
@@ -635,25 +635,25 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
       layoutDescription: 'Blended indoor/outdoor layout with weather-proof power sockets.',
       timing: '08:00 AM – 09:00 PM',
       amenities: ['Fiber Wi-Fi', 'Garden Seating', 'Universal Outlets'],
-      coverPhoto: '/images/cafes/concu-lounge.webp',
+      coverPhoto: '/images/cafes/5.webp',
       photos: [
         {
-          url: '/images/cafes/concu-lounge.webp',
+          url: '/images/cafes/5.webp',
           category: 'Atmosphere',
           caption: 'Modern glass-and-steel IT corridor tech space with 300 Mbps Wi-Fi'
         },
         {
-          url: '/images/cafes/ccd-interior.webp',
+          url: '/images/cafes/1.webp',
           category: 'Seating',
           caption: 'Motorized standing desks and ergonomic executive seating'
         },
         {
-          url: '/images/cafes/niloufer-interior.jpg',
+          url: '/images/cafes/4.jpg',
           category: 'Layout',
           caption: 'Zoned corporate tech floor with quiet meeting alcoves'
         },
         {
-          url: '/images/cafes/starbucks-interior.webp',
+          url: '/images/cafes/3.webp',
           category: 'Barista Counter',
           caption: 'High-speed espresso bar and healthy protein snacks'
         }
@@ -661,35 +661,35 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
     },
     {
       id: 'kzp-6',
-      name: 'Prashanth Nagar WorkCafé',
+      name: 'Prashanth Nagar WorkCafe',
       area: 'Prashanth Nagar, Kazipet',
       address: 'Near Old Water Tank, Prashanth Nagar, Kazipet',
       rating: '4.8',
       reviewCount: 72,
-      atmosphereTag: 'Quiet neighborhood work café with comfortable oak seating, plants, and fast Wi-Fi.',
+      atmosphereTag: 'Quiet neighborhood work cafe with comfortable oak seating, plants, and fast Wi-Fi.',
       seatingTypes: ['Oak Desks', 'Silent Pods', 'Window Seats'],
       layoutDescription: 'Clean linear desk arrangement with comfortable armchairs.',
       timing: '08:30 AM – 09:30 PM',
       amenities: ['Gigabit Wi-Fi', 'Quiet Ambience', 'Coffee Service'],
-      coverPhoto: '/images/cafes/ccd-interior.webp',
+      coverPhoto: '/images/cafes/6.webp',
       photos: [
         {
-          url: '/images/cafes/ccd-interior.webp',
+          url: '/images/cafes/1.webp',
           category: 'Atmosphere',
           caption: 'Fast-casual commuter work lounge with power sockets at every seat'
         },
         {
-          url: '/images/cafes/starbucks-interior.webp',
+          url: '/images/cafes/3.webp',
           category: 'Seating',
           caption: 'Quick-stop high-top laptop desks and cushioned banquettes'
         },
         {
-          url: '/images/cafes/concu-lounge.webp',
+          url: '/images/cafes/5.webp',
           category: 'Layout',
           caption: 'Linear layout optimized for focused short-duration sessions'
         },
         {
-          url: '/images/cafes/roastery-interior.jpg',
+          url: '/images/cafes/2.jpg',
           category: 'Barista Counter',
           caption: 'Rapid-dispense South Indian filter coffee and fresh pastries'
         }
@@ -709,25 +709,25 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
       layoutDescription: 'Spacious two-level lounge with expansive barista counter and cozy soft-cushioned nooks.',
       timing: '07:00 AM – 11:00 PM',
       amenities: ['High-Speed Wi-Fi', 'Universal Power Outlets', 'Nitro Cold Brew on Tap', 'Starbucks Rewards'],
-      coverPhoto: '/images/cafes/starbucks-interior.webp',
+      coverPhoto: '/images/cafes/1.webp',
       photos: [
         {
-          url: '/images/cafes/starbucks-interior.webp',
+          url: '/images/cafes/3.webp',
           category: 'Barista Counter',
           caption: 'Signature Starbucks barista counter, green walls, and warm ambient pendant lighting'
         },
         {
-          url: '/images/cafes/ccd-interior.webp',
+          url: '/images/cafes/1.webp',
           category: 'Atmosphere',
           caption: 'Solid oak communal worktables with individual laptop power sockets'
         },
         {
-          url: '/images/cafes/concu-lounge.webp',
+          url: '/images/cafes/5.webp',
           category: 'Seating',
           caption: 'Open-concept two-story layout with quiet study bays and plush armchairs'
         },
         {
-          url: '/images/cafes/niloufer-interior.jpg',
+          url: '/images/cafes/4.jpg',
           category: 'Layout',
           caption: 'Spacious dining and lounge seating with high ceilings'
         }
@@ -735,7 +735,7 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
     },
     {
       id: 'hyd-2',
-      name: 'Café Coffee Day (CCD)',
+      name: 'Cafe Coffee Day (CCD)',
       area: 'Banjara Hills, Hyderabad',
       address: 'Road No. 1, Banjara Hills, Hyderabad',
       rating: '4.8',
@@ -745,25 +745,25 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
       layoutDescription: 'Cozy booth layout designed for meetings, collaborative brainstorming, and quick coffee breaks.',
       timing: '08:00 AM – 11:30 PM',
       amenities: ['Complimentary Wi-Fi', 'Comfortable Booths', 'All-Day Breakfast', 'Cold Brews & Frappes'],
-      coverPhoto: '/images/cafes/ccd-interior.webp',
+      coverPhoto: '/images/cafes/2.jpg',
       photos: [
         {
-          url: '/images/cafes/ccd-interior.webp',
+          url: '/images/cafes/1.webp',
           category: 'Seating',
           caption: 'Signature cushioned booths with deep comfortable seating for work sessions'
         },
         {
-          url: '/images/cafes/niloufer-interior.jpg',
+          url: '/images/cafes/4.jpg',
           category: 'Atmosphere',
           caption: 'Vibrant coffeehouse ambiance with warm lighting and comfortable seating'
         },
         {
-          url: '/images/cafes/starbucks-interior.webp',
+          url: '/images/cafes/3.webp',
           category: 'Layout',
           caption: 'Fresh roasted coffee beans and classic espresso brewing station'
         },
         {
-          url: '/images/cafes/concu-lounge.webp',
+          url: '/images/cafes/5.webp',
           category: 'Barista Counter',
           caption: 'Well-partitioned seating zones balancing focus and social coffee chats'
         }
@@ -771,7 +771,7 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
     },
     {
       id: 'hyd-3',
-      name: 'Niloufer Café',
+      name: 'Niloufer Cafe',
       area: 'Lakdikapul, Hyderabad',
       address: 'Red Hills Road, Lakdikapul, Hyderabad',
       rating: '4.9',
@@ -781,25 +781,25 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
       layoutDescription: 'Grand heritage dining hall with high ceilings, vintage Hyderabadi arches, and bustling tea service.',
       timing: '05:30 AM – 12:00 AM',
       amenities: ['World-Famous Irani Chai', 'Osmania Biscuits', 'AC Dining Hall', 'Takeaway Counter'],
-      coverPhoto: '/images/cafes/niloufer-interior.jpg',
+      coverPhoto: '/images/cafes/3.webp',
       photos: [
         {
-          url: '/images/cafes/niloufer-interior.jpg',
+          url: '/images/cafes/4.jpg',
           category: 'Atmosphere',
           caption: 'Grand heritage hall with ornate chandeliers and authentic Hyderabadi charm'
         },
         {
-          url: '/images/cafes/concu-lounge.webp',
+          url: '/images/cafes/5.webp',
           category: 'Seating',
           caption: 'Classic marble-top tables and spacious heritage seating'
         },
         {
-          url: '/images/cafes/starbucks-interior.webp',
+          url: '/images/cafes/3.webp',
           category: 'Layout',
           caption: 'Signature simmering copper samovar and freshly baked Osmania biscuits'
         },
         {
-          url: '/images/cafes/ccd-interior.webp',
+          url: '/images/cafes/1.webp',
           category: 'Barista Counter',
           caption: 'Expansive air-conditioned dining halls with rapid table service'
         }
@@ -812,30 +812,30 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
       address: 'Road No. 14, Banjara Hills, Hyderabad',
       rating: '4.9',
       reviewCount: 440,
-      atmosphereTag: 'Picturesque heritage bungalow café surrounded by lush greenery, tranquil open courtyard, and artisan roastery aroma.',
+      atmosphereTag: 'Picturesque heritage bungalow cafe surrounded by lush greenery, tranquil open courtyard, and artisan roastery aroma.',
       seatingTypes: ['Courtyard Garden Tables', 'Veranda Wicker Chairs', 'Indoor AC Focus Desks', 'Bungalow Library Bays'],
       layoutDescription: 'Sprawling indoor-outdoor bungalow floor plan with sunlit courtyards and cozy reading nooks.',
       timing: '08:00 AM – 11:00 PM',
       amenities: ['Specialty Roastery', 'Outdoor Garden', 'Cascara & Cold Brews', 'High-Speed Wi-Fi'],
-      coverPhoto: '/images/cafes/roastery-interior.jpg',
+      coverPhoto: '/images/cafes/4.jpg',
       photos: [
         {
-          url: '/images/cafes/roastery-interior.jpg',
+          url: '/images/cafes/2.jpg',
           category: 'Atmosphere',
           caption: 'Iconic industrial copper coffee roaster, mezzanine staircase, and wooden craft bar'
         },
         {
-          url: '/images/cafes/concu-lounge.webp',
+          url: '/images/cafes/5.webp',
           category: 'Seating',
           caption: 'Rustic wooden tables and comfortable garden chairs shaded by trees'
         },
         {
-          url: '/images/cafes/niloufer-interior.jpg',
+          url: '/images/cafes/4.jpg',
           category: 'Layout',
           caption: 'Fluid connectivity between the outdoor patio, air-conditioned rooms, and roastery'
         },
         {
-          url: '/images/cafes/starbucks-interior.webp',
+          url: '/images/cafes/3.webp',
           category: 'Barista Counter',
           caption: 'Dedicated manual brew bar with Chemex, Aeropress, and specialty single-origins'
         }
@@ -853,25 +853,25 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
       layoutDescription: 'Modern technology-focused floor plan with universal power strips at every seat.',
       timing: '07:30 AM – 11:00 PM',
       amenities: ['300 Mbps Wi-Fi', 'Universal Power Outlets', 'Specialty Single Origins', 'Artisan Bagels'],
-      coverPhoto: '/images/cafes/ccd-interior.webp',
+      coverPhoto: '/images/cafes/5.webp',
       photos: [
         {
-          url: '/images/cafes/ccd-interior.webp',
+          url: '/images/cafes/1.webp',
           category: 'Atmosphere',
           caption: 'Bright contemporary tech coffeehouse interior with warm blonde wood finishes'
         },
         {
-          url: '/images/cafes/starbucks-interior.webp',
+          url: '/images/cafes/3.webp',
           category: 'Seating',
           caption: 'Dedicated workbenches with individual charging sockets and ergonomic seating'
         },
         {
-          url: '/images/cafes/concu-lounge.webp',
+          url: '/images/cafes/5.webp',
           category: 'Layout',
           caption: 'Spacious acoustic design optimized for remote work and video calls'
         },
         {
-          url: '/images/cafes/roastery-interior.jpg',
+          url: '/images/cafes/2.jpg',
           category: 'Barista Counter',
           caption: 'Specialty manual pour-over bar, cold brew taps, and fresh bakery display'
         }
@@ -889,25 +889,25 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
       layoutDescription: 'Intimate French bistro layout with glasshouse conservatory and peaceful courtyard seating.',
       timing: '09:00 AM – 10:30 PM',
       amenities: ['French Patisserie', 'Artisanal Coffee', 'Valet Parking', 'Scenic Greenery'],
-      coverPhoto: '/images/cafes/concu-lounge.webp',
+      coverPhoto: '/images/cafes/6.webp',
       photos: [
         {
-          url: '/images/cafes/concu-lounge.webp',
+          url: '/images/cafes/5.webp',
           category: 'Atmosphere',
           caption: 'Elegant luxury lounge with sculptural paper lanterns, geometric marble floors, and terracotta chairs'
         },
         {
-          url: '/images/cafes/niloufer-interior.jpg',
+          url: '/images/cafes/4.jpg',
           category: 'Seating',
           caption: 'Plush banquettes and marble bistro tables surrounded by glasshouse plants'
         },
         {
-          url: '/images/cafes/starbucks-interior.webp',
+          url: '/images/cafes/3.webp',
           category: 'Layout',
           caption: 'Charming multi-room layout including an indoor conservatory and secluded patio'
         },
         {
-          url: '/images/cafes/ccd-interior.webp',
+          url: '/images/cafes/1.webp',
           category: 'Barista Counter',
           caption: 'Artisan dessert display counter and custom espresso beverage station'
         }
@@ -916,118 +916,131 @@ export const CITY_CAFES: Record<string, CafeOption[]> = {
   ]
 };
 
-// Always returns cafes with 4K photos for ANY selected city
+// Always returns 6 cafes with 4K photos for ANY selected city across any country or state
 export const getCafesForCity = (cityName: string): CafeOption[] => {
   if (CITY_CAFES[cityName] && CITY_CAFES[cityName].length >= 3) {
     return CITY_CAFES[cityName];
   }
+  const cleanId = cityName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
   return [
     {
-      id: `${cityName.toLowerCase().replace(/\s+/g, '-')}-1`,
-      name: `${cityName} Central Café`,
-      area: `${cityName}`,
-      address: `101 Main Avenue, ${cityName}`,
+      id: `${cleanId}-1`,
+      name: `${cityName} Central Cafe`,
+      area: `${cityName} Downtown`,
+      address: `101 Central Boulevard, ${cityName}`,
       rating: '4.9',
-      reviewCount: 95,
+      reviewCount: 148,
       atmosphereTag: 'Warm natural timber aesthetics with soft acoustic dampening and ambient warm lighting.',
       seatingTypes: ['Quiet Focus Pods', 'Ergonomic Desk Chairs', 'High-Top Counters', 'Sunlit Window Bay'],
       layoutDescription: 'Zoned quiet area partitioned from the main barista counter, with universal power at all seats.',
       timing: '08:00 AM – 09:30 PM',
-      amenities: ['300 Mbps Wi-Fi', 'Power at Desk', 'Quiet Acoustics'],
-      coverPhoto: '/images/cafes/concu-lounge.webp',
+      amenities: ['300 Mbps Wi-Fi', 'Power at Desk', 'Quiet Acoustics', 'Coffee Service'],
+      coverPhoto: '/images/cafes/1.webp',
       photos: [
-        {
-          url: '/images/cafes/starbucks-interior.webp',
-          category: 'Atmosphere',
-          caption: `${cityName} Central Interior & Work Atmosphere`
-        },
-        {
-          url: '/images/cafes/starbucks-interior.webp',
-          category: 'Seating',
-          caption: 'Ergonomic workspace seating with power outlets'
-        },
-        {
-          url: '/images/cafes/starbucks-interior.webp',
-          category: 'Layout',
-          caption: 'Open floor plan with quiet pods and team desks'
-        },
-        {
-          url: '/images/cafes/starbucks-interior.webp',
-          category: 'Barista Counter',
-          caption: 'Artisanal espresso and coffee bar'
-        }
+        { url: '/images/cafes/1.webp', category: 'Atmosphere', caption: 'Warm natural timber interior and quiet focus zone' },
+        { url: '/images/cafes/2.jpg', category: 'Seating', caption: 'Ergonomic task chairs with universal power docks' },
+        { url: '/images/cafes/3.webp', category: 'Layout', caption: 'Spacious collaborative floor plan with acoustic dampening' },
+        { url: '/images/cafes/4.jpg', category: 'Barista Counter', caption: 'Artisanal single-origin brew and espresso station' }
       ]
     },
     {
-      id: `${cityName.toLowerCase().replace(/\s+/g, '-')}-2`,
-      name: `${cityName} Tech Park Café`,
-      area: `${cityName}`,
-      address: `45 Tech Boulevard, ${cityName}`,
+      id: `${cleanId}-2`,
+      name: `${cityName} Tech Park Cafe`,
+      area: `${cityName} Tech Corridor`,
+      address: `45 Tech Innovation Way, ${cityName}`,
       rating: '4.8',
-      reviewCount: 82,
-      atmosphereTag: 'Contemporary industrial design with high ceilings and focused developer atmosphere.',
-      seatingTypes: ['Team Collaboration Tables', 'Standing Workstations', 'Cushioned Booths'],
-      layoutDescription: 'Open central work-floor flanked by acoustic booths and private meeting bays.',
+      reviewCount: 126,
+      atmosphereTag: 'Contemporary industrial design with exposed brickwork, high ceilings, and vibrant creative energy.',
+      seatingTypes: ['Team Collaboration Tables', 'Standing Workstations', 'Cushioned Booths', 'Corner Focus Pods'],
+      layoutDescription: 'Open central work-floor flanked by acoustic booths and a mezzanine break area.',
       timing: '08:30 AM – 10:00 PM',
-      amenities: ['High-Speed Wi-Fi', 'Standing Desks', 'Power Sockets'],
-      coverPhoto: '/images/cafes/concu-lounge.webp',
+      amenities: ['High-Speed Wi-Fi', 'Standing Desks', 'Power Sockets', 'Bakery Menu'],
+      coverPhoto: '/images/cafes/2.jpg',
       photos: [
-        {
-          url: '/images/cafes/starbucks-interior.webp',
-          category: 'Atmosphere',
-          caption: 'Modern workspace interior with natural airflow'
-        },
-        {
-          url: '/images/cafes/starbucks-interior.webp',
-          category: 'Seating',
-          caption: 'Focused workstations with deep desk surface area'
-        },
-        {
-          url: '/images/cafes/starbucks-interior.webp',
-          category: 'Layout',
-          caption: 'Collaborative team tables and breakout zones'
-        },
-        {
-          url: '/images/cafes/starbucks-interior.webp',
-          category: 'Barista Counter',
-          caption: 'Specialty coffee counter and beverage menu'
-        }
+        { url: '/images/cafes/2.jpg', category: 'Atmosphere', caption: 'Contemporary industrial design with natural lighting' },
+        { url: '/images/cafes/1.webp', category: 'Seating', caption: 'Motorized standing desks and task seating' },
+        { url: '/images/cafes/3.webp', category: 'Layout', caption: 'Open collaborative work benches and whiteboard spaces' },
+        { url: '/images/cafes/4.jpg', category: 'Barista Counter', caption: 'Specialty iced brews and bakery counter' }
       ]
     },
     {
-      id: `${cityName.toLowerCase().replace(/\s+/g, '-')}-3`,
-      name: `${cityName} Station Café`,
-      area: `${cityName}`,
-      address: `12 Station Square, ${cityName}`,
+      id: `${cleanId}-3`,
+      name: `${cityName} Urban Roasters`,
+      area: `${cityName} Commercial Strip`,
+      address: `88 Commercial Avenue, ${cityName}`,
       rating: '4.8',
-      reviewCount: 64,
-      atmosphereTag: 'Cozy transit work lounge with acoustic felt dividers, soft background music, and fast Wi-Fi.',
-      seatingTypes: ['Solid Oak Work Desks', 'Private Call Booths', 'Window Bar Seating'],
-      layoutDescription: 'Sunlit front bay for quiet work and private corners for laptop sessions.',
+      reviewCount: 110,
+      atmosphereTag: 'Minimalist Nordic cafe aesthetic with Scandinavian oak furniture, plants, and natural daylight.',
+      seatingTypes: ['Solid Oak Work Desks', 'Private Call Booths', 'Window Bar Seating', 'Executive Armchairs'],
+      layoutDescription: 'Sunlit front bay for quiet thinkers and back lounge for pair programming and discussions.',
       timing: '08:00 AM – 09:00 PM',
-      amenities: ['Gigabit Wi-Fi', 'Dual Sockets', 'Natural Lighting'],
-      coverPhoto: '/images/cafes/concu-lounge.webp',
+      amenities: ['Gigabit Wi-Fi', 'Dual Sockets', 'Natural Lighting', 'Artisan Coffee'],
+      coverPhoto: '/images/cafes/3.webp',
       photos: [
-        {
-          url: '/images/cafes/starbucks-interior.webp',
-          category: 'Atmosphere',
-          caption: 'Minimalist interior with botanical plants and daylight'
-        },
-        {
-          url: '/images/cafes/starbucks-interior.webp',
-          category: 'Seating',
-          caption: 'Oak tables equipped with individual power socket towers'
-        },
-        {
-          url: '/images/cafes/starbucks-interior.webp',
-          category: 'Layout',
-          caption: 'Quiet pod areas separated from discussion corners'
-        },
-        {
-          url: '/images/cafes/starbucks-interior.webp',
-          category: 'Barista Counter',
-          caption: 'Pour-over and espresso brew bar'
-        }
+        { url: '/images/cafes/3.webp', category: 'Atmosphere', caption: 'Minimalist Nordic interior with rich natural sunlight' },
+        { url: '/images/cafes/1.webp', category: 'Seating', caption: 'Solid oak desks with dual power outlets' },
+        { url: '/images/cafes/5.webp', category: 'Layout', caption: 'Private phone booths and team discussion pods' },
+        { url: '/images/cafes/2.jpg', category: 'Barista Counter', caption: 'Single-origin pour-overs and batch brew station' }
+      ]
+    },
+    {
+      id: `${cleanId}-4`,
+      name: `${cityName} Waterfront Bay Cafe`,
+      area: `${cityName} Promenade`,
+      address: `12 Waterfront Promenade, ${cityName}`,
+      rating: '4.9',
+      reviewCount: 135,
+      atmosphereTag: 'Scenic waterfront panorama with floor-to-ceiling glass, gentle breezes, and calm ambiance.',
+      seatingTypes: ['Lakeside Window Desks', 'Quiet Outdoor Pods', 'Ergonomic Workstations', 'Pair Tables'],
+      layoutDescription: 'Panoramic terrace facing the water with quiet indoor focus pods and power at all seats.',
+      timing: '07:30 AM – 09:30 PM',
+      amenities: ['300 Mbps Wi-Fi', 'Scenic View', 'Universal Outlets', 'Specialty Teas'],
+      coverPhoto: '/images/cafes/4.jpg',
+      photos: [
+        { url: '/images/cafes/4.jpg', category: 'Atmosphere', caption: 'Bright sunlit hall with panoramic glass views' },
+        { url: '/images/cafes/5.webp', category: 'Seating', caption: 'Cushioned bay armchairs with personal power ports' },
+        { url: '/images/cafes/1.webp', category: 'Layout', caption: 'Spacious floor plan with quiet focus niches' },
+        { url: '/images/cafes/3.webp', category: 'Barista Counter', caption: 'Specialty cold brews and organic loose-leaf tea' }
+      ]
+    },
+    {
+      id: `${cleanId}-5`,
+      name: `${cityName} Heritage WorkCafe`,
+      area: `${cityName} Heritage District`,
+      address: `24 Old Heritage Square, ${cityName}`,
+      rating: '4.8',
+      reviewCount: 98,
+      atmosphereTag: 'Heritage architecture with teakwood beam ceilings, quiet focus, and artisanal roastery aroma.',
+      seatingTypes: ['Teakwood Solo Desks', 'Quiet Library Pods', 'Ergonomic Task Chairs', 'Private Call Booth'],
+      layoutDescription: 'Colonial vaulted ceiling with individual acoustic study nooks and high-speed fiber.',
+      timing: '08:00 AM – 09:00 PM',
+      amenities: ['Gigabit Wi-Fi', 'Heritage Ambience', 'Task Reading Lamps', 'Batch Brews'],
+      coverPhoto: '/images/cafes/5.webp',
+      photos: [
+        { url: '/images/cafes/5.webp', category: 'Atmosphere', caption: 'Colonial teakwood ceilings with peaceful library atmosphere' },
+        { url: '/images/cafes/1.webp', category: 'Seating', caption: 'Solid wood workstations with warm task reading lamps' },
+        { url: '/images/cafes/4.jpg', category: 'Layout', caption: 'Acoustic-treated study halls with individual power' },
+        { url: '/images/cafes/2.jpg', category: 'Barista Counter', caption: 'Artisan espresso and pour-over bar' }
+      ]
+    },
+    {
+      id: `${cleanId}-6`,
+      name: `${cityName} Innovation Tech Lounge`,
+      area: `${cityName} University & Research Hub`,
+      address: `77 University Tech Drive, ${cityName}`,
+      rating: '4.9',
+      reviewCount: 162,
+      atmosphereTag: 'Sleek tech innovation lounge with dual monitor desks, fiber internet, and developer community vibe.',
+      seatingTypes: ['Dual-Screen Workbenches', 'Standing Desks', 'Whiteboard Pods', 'Executive Mesh Chairs'],
+      layoutDescription: 'Modern technology workspace with zoned quiet benches and collaboration bays.',
+      timing: '08:00 AM – 10:00 PM',
+      amenities: ['300 Mbps Wi-Fi', 'Standing Desks', 'Dual Monitors', 'Protein Snacks'],
+      coverPhoto: '/images/cafes/6.webp',
+      photos: [
+        { url: '/images/cafes/6.webp', category: 'Atmosphere', caption: 'High-tech workspace with dual-screen developer desks' },
+        { url: '/images/cafes/3.webp', category: 'Seating', caption: 'Ergonomic mesh chairs and motorized standing desks' },
+        { url: '/images/cafes/5.webp', category: 'Layout', caption: 'Open tech lounge with private glass acoustic phone booths' },
+        { url: '/images/cafes/2.jpg', category: 'Barista Counter', caption: 'Nitro coffee on tap and high-protein snack pantry' }
       ]
     }
   ];
@@ -1069,7 +1082,7 @@ export const LocationSelectorBar: React.FC<LocationSelectorBarProps> = ({
   const currentCity = value?.city || initialValues?.city || 'Warangal';
   const currentDate = value?.date || initialValues?.date || todayStr;
   const currentEndDate = value?.endDate || initialValues?.endDate || currentDate;
-  const initialCafe = value?.cafe || value?.cafeDesk || initialValues?.cafe || initialValues?.cafeDesk || getCafesForCity(currentCity)[0]?.name || 'Heritage Café';
+  const initialCafe = value?.cafe || value?.cafeDesk || initialValues?.cafe || initialValues?.cafeDesk || getCafesForCity(currentCity)[0]?.name || 'Heritage Cafe';
 
   const [country, setCountry] = useState<string>(currentCountry);
   const [state, setState] = useState<string>(currentState);
@@ -1127,7 +1140,7 @@ export const LocationSelectorBar: React.FC<LocationSelectorBarProps> = ({
 
   const totalPages = Math.ceil(currentCafes.length / CAFES_PER_PAGE);
 
-  // Paginated 3 cafés currently visible
+  // Paginated 3 cafes currently visible
   const displayedCafes = useMemo(() => {
     const start = cafePageIndex * CAFES_PER_PAGE;
     return currentCafes.slice(start, start + CAFES_PER_PAGE);
@@ -1149,7 +1162,7 @@ export const LocationSelectorBar: React.FC<LocationSelectorBarProps> = ({
   const handleCityChange = (newCity: string) => {
     setCity(newCity);
     const cafes = getCafesForCity(newCity);
-    const firstCafe = cafes[0]?.name || `${newCity} Central Café`;
+    const firstCafe = cafes[0]?.name || `${newCity} Central Cafe`;
     setSelectedCafe(firstCafe);
     setCafePageIndex(0);
 
@@ -1171,7 +1184,7 @@ export const LocationSelectorBar: React.FC<LocationSelectorBarProps> = ({
     const newCity = cities[0] || 'Warangal';
     setCity(newCity);
     const cafes = getCafesForCity(newCity);
-    const firstCafe = cafes[0]?.name || `${newCity} Central Café`;
+    const firstCafe = cafes[0]?.name || `${newCity} Central Cafe`;
     setSelectedCafe(firstCafe);
     setCafePageIndex(0);
 
@@ -1196,7 +1209,7 @@ export const LocationSelectorBar: React.FC<LocationSelectorBarProps> = ({
     const newCity = cities[0] || 'Warangal';
     setCity(newCity);
     const cafes = getCafesForCity(newCity);
-    const firstCafe = cafes[0]?.name || `${newCity} Central Café`;
+    const firstCafe = cafes[0]?.name || `${newCity} Central Cafe`;
     setSelectedCafe(firstCafe);
     setCafePageIndex(0);
 
@@ -1351,7 +1364,7 @@ export const LocationSelectorBar: React.FC<LocationSelectorBarProps> = ({
         </div>
       </div>
 
-      {/* SECTION 2: Select Café (1 at a time with Left & Right Arrow Navigation) */}
+      {/* SECTION 2: Select Cafe (1 at a time with Left & Right Arrow Navigation) */}
       {!hideCafeGrid && currentCafes.length > 0 && (
         <div className="pt-3 border-t border-border/70">
           {/* Header Bar with Proper Alignment & Left/Right Arrows */}
@@ -1359,14 +1372,14 @@ export const LocationSelectorBar: React.FC<LocationSelectorBarProps> = ({
             <div className="flex items-center gap-2">
               <Coffee className="h-4 w-4 text-primary shrink-0" />
               <span className="text-xs font-semibold text-foreground">
-                Select café in {city} ({currentCafes.length} available)
+                Select cafe in {city} ({currentCafes.length} available)
               </span>
             </div>
 
             {/* Pagination / Arrow Navigation Controls */}
             <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto">
               <span className="text-xs font-medium text-muted-foreground">
-                Café <span className="font-bold text-foreground">{cafePageIndex + 1}</span> of <span className="font-bold text-foreground">{currentCafes.length}</span>
+                Cafe <span className="font-bold text-foreground">{cafePageIndex + 1}</span> of <span className="font-bold text-foreground">{currentCafes.length}</span>
               </span>
 
               {/* Navigation Arrows */}
@@ -1375,8 +1388,8 @@ export const LocationSelectorBar: React.FC<LocationSelectorBarProps> = ({
                   type="button"
                   onClick={handlePrevCafePage}
                   disabled={cafePageIndex === 0}
-                  aria-label="Previous café"
-                  title="Previous café"
+                  aria-label="Previous cafe"
+                  title="Previous cafe"
                   className={`h-8 w-8 rounded-xl border flex items-center justify-center transition-all cursor-pointer ${
                     cafePageIndex === 0
                       ? 'border-border/40 text-muted-foreground/30 bg-muted/20 cursor-not-allowed'
@@ -1406,8 +1419,8 @@ export const LocationSelectorBar: React.FC<LocationSelectorBarProps> = ({
                   type="button"
                   onClick={handleNextCafePage}
                   disabled={cafePageIndex >= totalPages - 1}
-                  aria-label="Next café"
-                  title="Next café"
+                  aria-label="Next cafe"
+                  title="Next cafe"
                   className={`h-8 w-8 rounded-xl border flex items-center justify-center transition-all cursor-pointer ${
                     cafePageIndex >= totalPages - 1
                       ? 'border-border/40 text-muted-foreground/30 bg-muted/20 cursor-not-allowed'
@@ -1420,7 +1433,7 @@ export const LocationSelectorBar: React.FC<LocationSelectorBarProps> = ({
             </div>
           </div>
 
-          {/* Only 1 Café Displayed at a Time - Full-Width Image with Info Below */}
+          {/* Only 1 Cafe Displayed at a Time - Full-Width Image with Info Below */}
           <div className="relative">
             {displayedCafes.map((cafe) => {
               const isSelected = selectedCafe === cafe.name;
@@ -1436,7 +1449,7 @@ export const LocationSelectorBar: React.FC<LocationSelectorBarProps> = ({
                   {/* Full-Width 4K Image Header */}
                   <div className="relative w-full h-72 sm:h-80 md:h-96 overflow-hidden bg-muted">
                     <img
-                      src={cafe.coverPhoto || '/images/cafes/starbucks-interior.webp'}
+                      src={cafe.coverPhoto || '/images/cafes/1.webp'}
                       alt={cafe.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
@@ -1472,8 +1485,8 @@ export const LocationSelectorBar: React.FC<LocationSelectorBarProps> = ({
                           handlePrevCafePage();
                         }}
                         disabled={cafePageIndex === 0}
-                        aria-label="Previous café"
-                        title="Previous café"
+                        aria-label="Previous cafe"
+                        title="Previous cafe"
                         className={`pointer-events-auto h-10 w-10 rounded-full bg-black/60 hover:bg-black/90 text-white backdrop-blur-md flex items-center justify-center transition-all cursor-pointer shadow-lg ${
                           cafePageIndex === 0 ? 'opacity-0 pointer-events-none' : 'opacity-85 hover:opacity-100 hover:scale-110 active:scale-95'
                         }`}
@@ -1488,8 +1501,8 @@ export const LocationSelectorBar: React.FC<LocationSelectorBarProps> = ({
                           handleNextCafePage();
                         }}
                         disabled={cafePageIndex >= totalPages - 1}
-                        aria-label="Next café"
-                        title="Next café"
+                        aria-label="Next cafe"
+                        title="Next cafe"
                         className={`pointer-events-auto h-10 w-10 rounded-full bg-black/60 hover:bg-black/90 text-white backdrop-blur-md flex items-center justify-center transition-all cursor-pointer shadow-lg ${
                           cafePageIndex >= totalPages - 1 ? 'opacity-0 pointer-events-none' : 'opacity-85 hover:opacity-100 hover:scale-110 active:scale-95'
                         }`}
@@ -1511,7 +1524,7 @@ export const LocationSelectorBar: React.FC<LocationSelectorBarProps> = ({
 
                   {/* Down Below the Image: 1. Title/Address, 2. Selected for Booking CTA */}
                   <div className="p-5 sm:p-6 bg-card flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    {/* 1. Heritage Café, Subedari Collectorate Road, Warangal */}
+                    {/* 1. Heritage Cafe, Subedari Collectorate Road, Warangal */}
                     <div className="space-y-1">
                       <div className="flex items-center gap-2.5 flex-wrap">
                         <h3 className="font-bold text-lg sm:text-xl text-foreground group-hover:text-primary transition-colors">
@@ -1541,7 +1554,7 @@ export const LocationSelectorBar: React.FC<LocationSelectorBarProps> = ({
                             <span>Selected for booking</span>
                           </>
                         ) : (
-                          <span>Select this café</span>
+                          <span>Select this cafe</span>
                         )}
                       </button>
                     </div>

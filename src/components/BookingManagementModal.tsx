@@ -18,7 +18,7 @@ import {
 import { api } from '../services/api';
 import { Booking, BookingDurationType } from '../types';
 import { DateRangePicker } from './DateRangePicker';
-import { getTodayStr } from '../utils/dateUtils';
+import { getTodayStr, addDays } from '../utils/dateUtils';
 
 interface BookingManagementModalProps {
   isOpen: boolean;
@@ -592,9 +592,21 @@ export const BookingManagementModal: React.FC<BookingManagementModalProps> = ({
                     {rescheduleTarget.bookingType === 'hourly' ? 'Select New Date' : 'Select New Date Range'}
                   </label>
                   <DateRangePicker
-                    mode={rescheduleTarget.bookingType === 'hourly' ? 'single' : 'range'}
+                    mode={
+                      rescheduleTarget.bookingType === 'hourly'
+                        ? 'single'
+                        : rescheduleTarget.bookingType === 'weekly'
+                        ? 'weekly'
+                        : rescheduleTarget.bookingType === 'custom'
+                        ? 'custom'
+                        : 'range'
+                    }
                     startDate={newStartDate || getTodayStr()}
-                    endDate={newEndDate || newStartDate || getTodayStr()}
+                    endDate={
+                      rescheduleTarget.bookingType === 'weekly'
+                        ? addDays(newStartDate || getTodayStr(), 6)
+                        : newEndDate || newStartDate || getTodayStr()
+                    }
                     minDate={getTodayStr()}
                     onChange={range => {
                       setNewStartDate(range.startDate);

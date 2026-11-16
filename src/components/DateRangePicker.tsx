@@ -16,7 +16,7 @@ export interface DateRangePickerProps {
   onChange: (range: DateRangeValue) => void;
   minDate?: string;
   maxDate?: string;
-  mode?: 'range' | 'single';
+  mode?: 'range' | 'single' | 'weekly' | 'custom';
   showPresets?: boolean;
   highlightedDates?: string[];
   unavailableDates?: string[];
@@ -104,13 +104,16 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
     };
   }, [isOpen]);
 
-  const daysCount = getDaysDifference(startDate, endDate);
+  const daysCount = mode === 'weekly' ? 7 : getDaysDifference(startDate, endDate);
 
   const formattedStart = startDate ? formatDisplayDate(startDate, { includeDayOfWeek: false, includeYear: false }) : '';
   const formattedEnd = endDate ? formatDisplayDate(endDate, { includeDayOfWeek: false, includeYear: false }) : '';
 
+  const isWeekly = mode === 'weekly';
+  const isCustom = mode === 'custom';
+
   // In range mode, if startDate === endDate (or no range set), show "Select Dates" instead of "Nov 11" with "1d"
-  const hasRangeSelected = Boolean(startDate && endDate && startDate !== endDate);
+  const hasRangeSelected = Boolean(startDate && endDate && (startDate !== endDate || mode === 'weekly'));
 
   // Formatted trigger label
   const displaySummary = mode === 'single'
@@ -158,18 +161,30 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
                 <span className="font-bold text-foreground text-xs truncate">
                   {displaySummary}
                 </span>
-                {hasRangeSelected && mode === 'range' && (
-                  <span className="text-[10px] text-primary font-bold px-1.5 py-0.2 rounded-md bg-primary/10 shrink-0">
-                    {daysCount}d
+                {hasRangeSelected && mode !== 'single' && (
+                  <span className={`text-[10px] font-bold px-1.5 py-0.2 rounded-md shrink-0 ${
+                    isWeekly
+                      ? 'bg-purple-500/15 text-purple-700 dark:text-purple-300'
+                      : isCustom
+                      ? 'bg-blue-500/15 text-blue-700 dark:text-blue-300'
+                      : 'bg-primary/10 text-primary'
+                  }`}>
+                    {isWeekly ? '7d (Weekly)' : `${daysCount}d`}
                   </span>
                 )}
               </div>
             ) : (
               <div className="truncate">
                 <div className="text-xs font-bold text-foreground truncate">{displaySummary}</div>
-                {hasRangeSelected && mode === 'range' && (
+                {hasRangeSelected && mode !== 'single' && (
                   <div className="text-[10px] text-muted-foreground flex items-center gap-1 truncate mt-0.5">
-                    <span>{daysCount} {daysCount === 1 ? 'day pass' : 'days total'}</span>
+                    {isWeekly ? (
+                      <span className="font-semibold text-purple-600 dark:text-purple-400">7-day pass (fixed range)</span>
+                    ) : isCustom ? (
+                      <span>{daysCount} {daysCount === 1 ? 'day selected' : 'days total (flexible)'}</span>
+                    ) : (
+                      <span>{daysCount} {daysCount === 1 ? 'day pass' : 'days total'}</span>
+                    )}
                     <span>•</span>
                     <span className="text-primary font-medium group-hover:underline">Click to change</span>
                   </div>
@@ -180,10 +195,16 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
         </div>
 
         <div className="flex items-center gap-1.5 shrink-0 ml-1.5">
-          {!compact && hasRangeSelected && mode === 'range' && (
-            <span className="hidden sm:inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/15 text-amber-900 dark:text-amber-200 border border-amber-500/25">
-              <Sparkles className="h-2.5 w-2.5 text-amber-600 dark:text-amber-400" />
-              {daysCount}d
+          {!compact && hasRangeSelected && mode !== 'single' && (
+            <span className={`hidden sm:inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] font-bold border ${
+              isWeekly
+                ? 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border-purple-500/30'
+                : isCustom
+                ? 'bg-blue-500/15 text-blue-700 dark:text-blue-300 border-blue-500/30'
+                : 'bg-amber-500/15 text-amber-900 dark:text-amber-200 border-amber-500/25'
+            }`}>
+              <Sparkles className="h-2.5 w-2.5" />
+              {isWeekly ? 'Weekly Pass' : isCustom ? `${daysCount}d Custom` : `${daysCount}d`}
             </span>
           )}
           <ChevronDown

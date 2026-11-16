@@ -275,7 +275,7 @@ export const api = {
       return await res.json();
     } catch {
       return {
-        reply: "Celpin blends flexible co-working with artisanal café comfort! You can choose your preferred zone from the interactive floor map, request desk amenities, and check in instantly with a quick QR scan."
+        reply: "Celpin blends flexible co-working with artisanal cafe comfort! You can choose your preferred zone from the interactive floor map, request desk amenities, and check in instantly with a quick QR scan."
       };
     }
   }

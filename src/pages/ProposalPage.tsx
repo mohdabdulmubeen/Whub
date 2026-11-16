@@ -28,10 +28,10 @@ export const ProposalPage: React.FC = () => {
           Product Management · MVP Proposal
         </div>
         <h1 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-foreground">
-          Celpin — Smart Co-Working Café
+          Celpin — Smart Co-Working Cafe
         </h1>
         <p className="mt-3 text-lg text-muted-foreground max-w-2xl leading-relaxed">
-          A web application that combines the café experience with the functionality of a co-working space. Book a workspace by the hour, pre-order coffee to your seat, and check in with a QR code.
+          A web application that combines the cafe experience with the functionality of a co-working space. Book a workspace by the hour, pre-order coffee to your seat, and check in with a QR code.
         </p>
         <div className="flex flex-wrap gap-2 mt-4">
           <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold bg-primary text-primary-foreground">
@@ -71,10 +71,10 @@ export const ProposalPage: React.FC = () => {
         </div>
         <div className="text-muted-foreground space-y-3 leading-relaxed text-sm">
           <p>
-            Celpin is a web application that enables customers to book a workspace by the hour within a café environment, combining the comfort and ambiance of a café with the functionality of a co-working space. The MVP targets freelancers, remote workers, students, and professionals who need a flexible, productive workspace for 1–6 hours without the commitment of a traditional co-working membership.
+            Celpin is a web application that enables customers to book a workspace by the hour within a cafe environment, combining the comfort and ambiance of a cafe with the functionality of a co-working space. The MVP targets freelancers, remote workers, students, and professionals who need a flexible, productive workspace for 1–6 hours without the commitment of a traditional co-working membership.
           </p>
           <p>
-            The core value proposition is simple: <strong>reserve flexible workspace on demand, work where you're comfortable, and have great coffee delivered to your seat.</strong> With real-time seat availability, four distinct workspace zones, instant digital access passes, integrated café pre-orders, QR-based check-in, and a loyalty rewards system, Celpin delivers a 10/10 experience that merges productivity with café comfort.
+            The core value proposition is simple: <strong>reserve flexible workspace on demand, work where you're comfortable, and have great coffee delivered to your seat.</strong> With real-time seat availability, four distinct workspace zones, instant digital access passes, integrated cafe pre-orders, QR-based check-in, and a loyalty rewards system, Celpin delivers a 10/10 experience that merges productivity with cafe comfort.
           </p>
         </div>
       </section>
@@ -90,8 +90,8 @@ export const ProposalPage: React.FC = () => {
         <ul className="space-y-3 mt-4">
           {[
             'Traditional co-working spaces require rigid monthly commitments and upfront deposits — impractical for someone who just needs a desk for a few hours.',
-            'Regular cafés have unpredictable seating, no guarantee of power sockets, inconsistent Wi-Fi, and implicit pressure to keep ordering food.',
-            'There is no way to know in advance whether a café has available seats, leading to wasted trips and frustration.',
+            'Regular cafes have unpredictable seating, no guarantee of power sockets, inconsistent Wi-Fi, and implicit pressure to keep ordering food.',
+            'There is no way to know in advance whether a cafe has available seats, leading to wasted trips and frustration.',
             'Freelancers and students lack a professional yet affordable environment for focused work, video calls, or small team meetings.',
             'No existing platform seamlessly combines workspace booking with food and beverage ordering for direct desk delivery.'
           ].map((prob, i) => (
@@ -180,7 +180,7 @@ export const ProposalPage: React.FC = () => {
             { step: '01', title: 'Discover', desc: 'User lands on Celpin, explores zone features, and checks the live floor map.' },
             { step: '02', title: 'Select Workspace', desc: 'Selects Quiet Zone, Collaboration Table, Window Seat, or Premium Desk.' },
             { step: '03', title: 'Choose Duration', desc: 'Chooses 1–6 hours with flexible on-demand allocation.' },
-            { step: '04', title: 'Add Café Pre-Orders', desc: 'Adds cappuccino, cold brew, or meals to be delivered upon arrival.' },
+            { step: '04', title: 'Add Cafe Pre-Orders', desc: 'Adds cappuccino, cold brew, or meals to be delivered upon arrival.' },
             { step: '05', title: 'Pass Generation', desc: 'Instant pass creation with encrypted dynamic QR and backup turnstile PIN.' },
             { step: '06', title: 'Work', desc: 'Scans QR pass at entrance scanner; desk unlocks and barista begins order.' },
             { step: '07', title: 'Rate & Earn', desc: 'Submits 5-star rating on Wi-Fi and comfort, earning bonus loyalty credits.' }
@@ -213,7 +213,7 @@ export const ProposalPage: React.FC = () => {
           <div className="p-4 rounded-xl border border-border bg-card">
             <p className="text-xs font-semibold text-primary uppercase">Backend</p>
             <p className="font-medium mt-1">Node.js + Express.js REST API</p>
-            <p className="text-xs text-muted-foreground mt-1">Modular endpoints for seats, bookings, café menu, rewards, and AI chat.</p>
+            <p className="text-xs text-muted-foreground mt-1">Modular endpoints for seats, bookings, cafe menu, rewards, and AI chat.</p>
           </div>
           <div className="p-4 rounded-xl border border-border bg-card">
             <p className="text-xs font-semibold text-primary uppercase">Icons & Design</p>

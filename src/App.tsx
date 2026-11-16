@@ -12,7 +12,6 @@ import { RegisterPage } from './pages/RegisterPage';
 import { AdminPage } from './pages/AdminPage';
 import { CareersPage } from './pages/CareersPage';
 import { AboutPage } from './pages/AboutPage';
-import { CelpinChatWidget } from './components/CelpinChatWidget';
 
 export function App() {
   const [currentPage, setCurrentPage] = useState<string>('home');
@@ -87,8 +86,6 @@ export function App() {
         {/* Celpin Official Footer */}
         <CelpinFooter onNavigate={handleNavigate} />
 
-        {/* Celpin AI Concierge Floating Chat Assistant */}
-        <CelpinChatWidget />
       </div>
     </NotificationProvider>
   );

@@ -254,7 +254,7 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({
                   <Coffee className="h-5 w-5" />
                 </div>
                 <div>
-                  <h2 className="text-sm font-semibold">Smart Café &amp; Table Service</h2>
+                  <h2 className="text-sm font-semibold">Smart Cafe &amp; Table Service</h2>
                   <p className="text-xs text-muted-foreground mt-0.5">Order espresso, cold brew, and snacks directly to your seat via QR.</p>
                 </div>
               </div>

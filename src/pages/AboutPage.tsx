@@ -41,7 +41,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
             </h1>
 
             <p className="mt-6 text-lg sm:text-xl text-muted-foreground leading-relaxed">
-              Celpin brings the perfect synthesis of boutique café hospitality, ergonomic comfort, and enterprise-grade tech infrastructure to professionals and growing teams across India.
+              Celpin brings the perfect synthesis of boutique cafe hospitality, ergonomic comfort, and enterprise-grade tech infrastructure to professionals and growing teams across India.
             </p>
           </div>
         </div>
@@ -93,7 +93,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                   Frictionless amenities
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Enjoy high-speed optical Wi-Fi and café-style table service delivered directly to your desk. Stay fueled with fresh barista brews without losing your momentum.
+                  Enjoy high-speed optical Wi-Fi and cafe-style table service delivered directly to your desk. Stay fueled with fresh barista brews without losing your momentum.
                 </p>
               </div>
               <div className="mt-6 pt-4 border-t border-border/60 flex items-center gap-2 text-xs font-semibold text-primary">
@@ -146,7 +146,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                 <span>Our story</span>
               </div>
               <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-foreground leading-tight">
-                Born to bridge the gap between noisy cafés and rigid offices.
+                Born to bridge the gap between noisy cafes and rigid offices.
               </h2>
               <p className="mt-5 text-base sm:text-lg text-muted-foreground leading-relaxed">
                 We observed millions of creators, remote software engineers, and founders struggling with an everyday dilemma: traditional corporate leases are cumbersome and expensive, while neighborhood coffee shops lack power sockets, quiet acoustic zones, and reliable connectivity.

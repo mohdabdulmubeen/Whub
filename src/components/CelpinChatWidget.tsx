@@ -7,7 +7,7 @@ export const CelpinChatWidget: React.FC = () => {
   const [messages, setMessages] = useState<Array<{ sender: 'user' | 'bot'; text: string }>>([
     {
       sender: 'bot',
-      text: "Hello! I'm your Celpin AI Concierge. Ask me anything about seats, zones, amenities, café orders, or QR check-in!"
+      text: "Hello! I'm your Celpin AI Concierge. Ask me anything about seats, zones, amenities, cafe orders, or QR check-in!"
     }
   ]);
   const [input, setInput] = useState('');

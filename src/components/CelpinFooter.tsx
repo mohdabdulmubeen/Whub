@@ -41,11 +41,6 @@ export const CelpinFooter: React.FC<FooterProps> = ({ onNavigate }) => {
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('proposal')} className="hover:text-foreground transition-colors cursor-pointer">
-                  Enterprise Pass
-                </button>
-              </li>
-              <li>
                 <button onClick={() => onNavigate('register')} className="hover:text-foreground transition-colors cursor-pointer">
                   Member registration
                 </button>
@@ -73,15 +68,6 @@ export const CelpinFooter: React.FC<FooterProps> = ({ onNavigate }) => {
                   className="hover:text-foreground transition-colors cursor-pointer"
                 >
                   Careers
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('admin')}
-                  className="hover:text-foreground transition-colors cursor-pointer text-xs opacity-75 hover:opacity-100"
-                >
-                  Admin Portal
                 </button>
               </li>
             </ul>

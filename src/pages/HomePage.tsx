@@ -97,7 +97,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenListSpace 
               <div className="relative rounded-2xl overflow-hidden shadow-2xl ring-1 ring-border">
                 <img
                   src="https://images.pexels.com/photos/4339913/pexels-photo-4339913.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-                  alt="Professionals working in a modern café co-working space"
+                  alt="Professionals working in a modern cafe co-working space"
                   className="w-full h-auto object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
@@ -444,7 +444,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenListSpace 
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="h-3.5 w-3.5 text-success shrink-0" />
-                  <span>On-demand café desk pre-orders</span>
+                  <span>On-demand cafe desk pre-orders</span>
                 </div>
               </div>
             </div>

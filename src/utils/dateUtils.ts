@@ -1,5 +1,5 @@
 /**
- * Date Utility Functions for Celpin Smart Co-Working Café
+ * Date Utility Functions for Celpin Smart Co-Working Cafe
  * Zero-dependency, timezone-safe date helpers for booking ranges and calendars.
  */
 

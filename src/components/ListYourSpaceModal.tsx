@@ -258,7 +258,7 @@ export const ListYourSpaceModal: React.FC<ListYourSpaceModalProps> = ({ isOpen, 
                     >
                       <option value="">-Select-</option>
                       <option value="Coworking Space">Coworking Space</option>
-                      <option value="Café / Restaurant">Café / Restaurant</option>
+                      <option value="Cafe / Restaurant">Cafe / Restaurant</option>
                       <option value="Commercial Office">Commercial Office</option>
                       <option value="Hotel / Lounge">Hotel / Lounge</option>
                       <option value="Standalone Building / Floor">Standalone Building / Floor</option>
@@ -275,7 +275,7 @@ export const ListYourSpaceModal: React.FC<ListYourSpaceModalProps> = ({ isOpen, 
                       type="text"
                       value={establishmentName}
                       onChange={(e) => setEstablishmentName(e.target.value)}
-                      placeholder="e.g. Hive Workspaces / Roast Café"
+                      placeholder="e.g. Hive Workspaces / Roast Cafe"
                       className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     />
                   </div>

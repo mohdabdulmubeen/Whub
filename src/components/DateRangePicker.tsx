@@ -201,7 +201,7 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
                 ? 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border-purple-500/30'
                 : isCustom
                 ? 'bg-blue-500/15 text-blue-700 dark:text-blue-300 border-blue-500/30'
-                : 'bg-amber-500/15 text-amber-900 dark:text-amber-200 border-amber-500/25'
+                : 'bg-primary/15 text-foreground border-primary/25'
             }`}>
               <Sparkles className="h-2.5 w-2.5" />
               {isWeekly ? 'Weekly Pass' : isCustom ? `${daysCount}d Custom` : `${daysCount}d`}

@@ -125,7 +125,7 @@ export const BookingManagementModal: React.FC<BookingManagementModalProps> = ({
         );
       case 'monthly':
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
             <CalendarDays className="w-3 h-3" /> Monthly Pass
           </span>
         );
@@ -512,7 +512,7 @@ export const BookingManagementModal: React.FC<BookingManagementModalProps> = ({
                 </div>
               ) : (
                 <>
-                  <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-700 dark:text-amber-400 text-xs space-y-1">
+                  <div className="p-3.5 rounded-xl bg-primary/10 border border-primary/20 text-foreground text-xs space-y-1">
                     <p className="font-semibold">Cancellation Policy &amp; Terms:</p>
                     <ul className="list-disc pl-4 space-y-0.5 text-[11px]">
                       <li>24+ hours before start time: <strong>100% full credit refund</strong> to your Celpin account.</li>

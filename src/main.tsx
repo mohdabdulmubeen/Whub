@@ -39,7 +39,7 @@ class ErrorBoundary extends React.Component<
             onClick={() => window.location.reload()}
             style={{
               padding: '10px 20px',
-              backgroundColor: '#d97706',
+              backgroundColor: '#b5835a',
               color: 'white',
               border: 'none',
               borderRadius: '8px',
@@ -57,7 +57,14 @@ class ErrorBoundary extends React.Component<
   }
 }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+const rootElement = document.getElementById('root')!;
+let root = (window as any).__celpin_root;
+if (!root) {
+  root = ReactDOM.createRoot(rootElement);
+  (window as any).__celpin_root = root;
+}
+
+root.render(
   <React.StrictMode>
     <ErrorBoundary>
       <I18nProvider>

@@ -466,7 +466,7 @@ export const DateRangeCalendar: React.FC<DateRangeCalendarProps> = ({
                   ? 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border-purple-500/30'
                   : isCustom
                   ? 'bg-blue-500/15 text-blue-700 dark:text-blue-300 border-blue-500/30'
-                  : 'bg-amber-500/15 text-amber-900 dark:text-amber-200 border-amber-500/30'
+                  : 'bg-primary/15 text-foreground border-primary/30'
               }`}
               aria-live="polite"
             >
@@ -701,12 +701,12 @@ export const DateRangeCalendar: React.FC<DateRangeCalendarProps> = ({
           } else if (inRange) {
             cellBg = isWeekly
               ? 'bg-purple-500/20 text-purple-950 dark:text-purple-100 font-semibold'
-              : 'bg-amber-500/20 text-amber-950 dark:text-amber-100 font-semibold';
+              : 'bg-primary/20 text-foreground font-semibold';
             roundedCorners = 'rounded-none';
           } else if (inHoverRange) {
             cellBg = isWeekly
               ? 'bg-purple-500/15 text-foreground font-medium'
-              : 'bg-amber-500/10 text-foreground font-medium';
+              : 'bg-primary/10 text-foreground font-medium';
             roundedCorners = 'rounded-none';
           } else if (isOutsideWeekly) {
             textStyle = 'text-muted-foreground/45 hover:text-foreground/70';
@@ -720,7 +720,7 @@ export const DateRangeCalendar: React.FC<DateRangeCalendarProps> = ({
           }
 
           if (isHighlighted && !isStart && !isEnd) {
-            cellBg += ' ring-1 ring-inset ring-amber-500/60 font-bold';
+            cellBg += ' ring-1 ring-inset ring-primary/60 font-bold';
           }
 
           return (
@@ -731,7 +731,7 @@ export const DateRangeCalendar: React.FC<DateRangeCalendarProps> = ({
                 inRange && !isStart && !isEnd
                   ? isWeekly
                     ? 'bg-purple-500/10 dark:bg-purple-500/15'
-                    : 'bg-amber-500/10 dark:bg-amber-500/15'
+                    : 'bg-primary/10 dark:bg-primary/15'
                   : ''
               }`}
             >

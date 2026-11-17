@@ -347,14 +347,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenListSpace 
       </section>
 
       {/* Steps Section — International Standard Workflow */}
-      <section className="py-20 lg:py-28 bg-[#fdf4ec] dark:bg-[#18110b] border-y border-[#f5dfcf] dark:border-amber-950/50 relative overflow-hidden">
+      <section className="py-20 lg:py-28 bg-[#f4f3ee] dark:bg-slate-900/60 border-y border-[#e5e3db] dark:border-slate-800/80 relative overflow-hidden">
         {/* Subtle decorative background gradient */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-orange-500/5 blur-[120px] rounded-full pointer-events-none"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-tan-500/5 blur-[120px] rounded-full pointer-events-none"></div>
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 rounded-full border border-orange-200 dark:border-amber-900/50 bg-white dark:bg-slate-900 px-3.5 py-1 text-xs font-semibold text-primary mb-4 shadow-2xs">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#e5e3db] dark:border-slate-800 bg-white dark:bg-slate-900 px-3.5 py-1 text-xs font-semibold text-primary mb-4 shadow-2xs">
               {t('steps.badge', 'Global coworking standard')}
             </div>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
@@ -372,7 +372,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenListSpace 
               <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div>
                 <div className="flex items-center justify-between mb-5">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-amber-600 text-primary-foreground font-black font-display text-base shadow-md group-hover:scale-110 group-hover:shadow-primary/30 group-hover:shadow-lg transition-transform duration-300">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-tan-600 text-primary-foreground font-black font-display text-base shadow-md group-hover:scale-110 group-hover:shadow-primary/30 group-hover:shadow-lg transition-transform duration-300">
                     01
                   </div>
                   <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
@@ -413,7 +413,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenListSpace 
               <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div>
                 <div className="flex items-center justify-between mb-5">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-amber-600 text-primary-foreground font-black font-display text-base shadow-md group-hover:scale-110 group-hover:shadow-primary/30 group-hover:shadow-lg transition-transform duration-300">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-tan-600 text-primary-foreground font-black font-display text-base shadow-md group-hover:scale-110 group-hover:shadow-primary/30 group-hover:shadow-lg transition-transform duration-300">
                     02
                   </div>
                   <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
@@ -454,7 +454,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenListSpace 
               <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div>
                 <div className="flex items-center justify-between mb-5">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-amber-600 text-primary-foreground font-black font-display text-base shadow-md group-hover:scale-110 group-hover:shadow-primary/30 group-hover:shadow-lg transition-transform duration-300">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-tan-600 text-primary-foreground font-black font-display text-base shadow-md group-hover:scale-110 group-hover:shadow-primary/30 group-hover:shadow-lg transition-transform duration-300">
                     03
                   </div>
                   <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
@@ -495,7 +495,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenListSpace 
               <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div>
                 <div className="flex items-center justify-between mb-5">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-amber-600 text-primary-foreground font-black font-display text-base shadow-md group-hover:scale-110 group-hover:shadow-primary/30 group-hover:shadow-lg transition-transform duration-300">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-tan-600 text-primary-foreground font-black font-display text-base shadow-md group-hover:scale-110 group-hover:shadow-primary/30 group-hover:shadow-lg transition-transform duration-300">
                     04
                   </div>
                   <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">

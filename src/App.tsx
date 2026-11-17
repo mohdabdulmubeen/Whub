@@ -28,7 +28,7 @@ export function App() {
 
   return (
     <NotificationProvider>
-      <div className="min-h-screen flex flex-col bg-background text-foreground selection:bg-amber-600 selection:text-white">
+      <div className="min-h-screen flex flex-col bg-background text-foreground selection:bg-tan-500 selection:text-white">
         {/* Celpin Official Navbar */}
         <CelpinNavbar
           currentPage={currentPage}

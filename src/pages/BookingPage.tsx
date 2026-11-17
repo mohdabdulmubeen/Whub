@@ -884,38 +884,45 @@ export const BookingPage: React.FC<BookingPageProps> = ({
                     <div
                       key={z.id}
                       onClick={() => handleZoneSelect(z.id)}
-                      className={`rounded-xl border p-5 transition-all cursor-pointer ${
+                      className={`group relative rounded-2xl border p-5 sm:p-6 transition-all duration-300 ease-out cursor-pointer overflow-hidden backdrop-blur-xl ${
                         isZoneActive
-                          ? 'border-primary ring-2 ring-primary/20 bg-card shadow-md'
-                          : 'border-border bg-card hover:border-border/80 hover:shadow-xs'
+                          ? 'border-[#b5835a] ring-2 ring-[#c89b72]/40 bg-gradient-to-br from-[#faf4ec] via-[#f5eadc] to-[#ebdcc8] dark:from-[#2a1f16] dark:via-[#221810] dark:to-[#1a120b] shadow-[0_16px_36px_rgba(181,131,90,0.25),inset_0_1px_1px_rgba(255,255,255,0.95)]'
+                          : 'border-[#e8ded4] dark:border-white/10 bg-gradient-to-br from-white/80 via-white/50 to-[#fdfbf9]/40 dark:from-slate-900/60 dark:via-slate-900/40 dark:to-white/5 shadow-[0_8px_24px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.85)] hover:-translate-y-1.5 hover:border-[#c49a74] dark:hover:border-[#b8865c] hover:bg-gradient-to-br hover:from-[#fcf8f3] hover:via-[#f7efe4] hover:to-[#eee0cf] dark:hover:from-[#241c15] dark:hover:via-[#1e1711] dark:hover:to-[#18110b] hover:shadow-[0_20px_40px_-10px_rgba(181,131,90,0.32),inset_0_1px_1px_rgba(255,255,255,0.95)]'
                       }`}
                     >
-                      <div className="flex items-start justify-between">
-                        <div className="flex items-start gap-3">
-                          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary shrink-0">
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex items-start gap-3.5">
+                          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-b from-[#d4a373] via-[#c08d5e] to-[#a87449] text-white shrink-0 shadow-[0_3px_0_0_#7c4f2a,0_6px_10px_rgba(181,131,90,0.3),inset_0_1px_0_rgba(255,255,255,0.5)] group-hover:scale-105 group-hover:shadow-[0_4px_0_0_#7c4f2a,0_8px_14px_rgba(181,131,90,0.4)] transition-all">
                             {z.icon}
                           </div>
                           <div>
-                            <h3 className="font-semibold text-base">{z.name}</h3>
-                            <p className="text-sm text-muted-foreground mt-0.5">{z.desc}</p>
+                            <div className="flex flex-wrap items-center gap-2.5">
+                              {/* 3D Zone Name Plate in Classy Minimalist Tan */}
+                              <div className="relative inline-flex items-center px-3.5 py-1 rounded-xl bg-gradient-to-b from-white via-[#fcf8f3] to-[#f5ebde] dark:from-neutral-800 dark:via-neutral-850 dark:to-neutral-900 border border-[#dfcaa7]/90 dark:border-[#a87449]/40 shadow-[0_4px_0_0_#b5835a,0_8px_16px_-2px_rgba(181,131,90,0.28),inset_0_1px_0_0_rgba(255,255,255,0.95)] group-hover:-translate-y-0.5 group-hover:shadow-[0_5px_0_0_#a87449,0_10px_20px_-2px_rgba(181,131,90,0.38)] group-hover:border-[#c89b72] transition-all">
+                                <h3 className="font-display font-black text-base sm:text-lg text-[#3d2716] dark:text-white tracking-tight drop-shadow-[0_1px_0_rgba(255,255,255,0.9)] dark:drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+                                  {z.name}
+                                </h3>
+                              </div>
+                              <span className="inline-flex items-center rounded-lg px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-[#ecd9c6]/70 text-[#7c4d28] dark:bg-[#342417] dark:text-[#e4be9c] border border-[#dfc5ad] dark:border-[#7c4d28]/40 backdrop-blur-xs">
+                                {z.badge}
+                              </span>
+                            </div>
+                            <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">{z.desc}</p>
                           </div>
                         </div>
                         <div className="text-right shrink-0 flex flex-col items-end gap-1">
-                          <span className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
-                            {z.badge}
-                          </span>
-                          <span className="font-display font-extrabold text-base text-foreground">
+                          <span className="font-display font-extrabold text-base sm:text-lg text-foreground">
                             ₹{z.hourlyRate} <span className="text-xs font-normal text-muted-foreground">/ hr</span>
                           </span>
-                          <span className="text-[11px] text-muted-foreground">
+                          <span className="text-[11px] font-medium text-muted-foreground">
                             Day pass: ₹{z.dailyRate}
                           </span>
                         </div>
                       </div>
 
-                      <div className="mt-4 pt-4 border-t border-border/60">
+                      <div className="mt-4 pt-4 border-t border-[#e8ded4] dark:border-white/10">
                         <div className="flex items-center gap-2 mb-3">
-                          <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-secondary text-secondary-foreground">
+                          <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-white/80 dark:bg-neutral-900 border-[#e2d5c8] dark:border-neutral-800 text-foreground shadow-2xs backdrop-blur-xs">
                             {availableInZone} available
                           </span>
                         </div>
@@ -933,12 +940,12 @@ export const BookingPage: React.FC<BookingPageProps> = ({
                                   setSelectedSeat(seat);
                                   setSelectedZone(seat.zone);
                                 }}
-                                className={`flex flex-col items-center gap-1 rounded-xl border p-3 text-sm font-medium transition-all ${
+                                className={`flex flex-col items-center gap-1 rounded-xl border p-3 text-sm font-medium transition-all backdrop-blur-md ${
                                   isSelected
-                                    ? 'border-primary bg-primary text-primary-foreground shadow-sm'
+                                    ? 'border-[#b5835a] bg-gradient-to-b from-[#c08d5e] to-[#a87449] text-white shadow-[0_4px_12px_rgba(181,131,90,0.45)]'
                                     : isAvailable
-                                    ? 'border-border hover:border-primary/50 hover:bg-accent text-foreground'
-                                    : 'border-border bg-muted/50 text-muted-foreground cursor-not-allowed opacity-50'
+                                    ? 'border-[#e2d5c8] dark:border-neutral-800 bg-white/80 dark:bg-neutral-900/80 hover:border-[#b5835a] hover:bg-[#faf4ec] dark:hover:bg-neutral-800 shadow-2xs text-foreground'
+                                    : 'border-border/60 bg-muted/40 text-muted-foreground cursor-not-allowed opacity-50'
                                 }`}
                               >
                                 <span className="font-bold">{seat.name}</span>
@@ -1342,18 +1349,18 @@ export const BookingPage: React.FC<BookingPageProps> = ({
                     Your {bookingResult.bookingType} workspace pass is reserved. Show this pass at the entrance.
                   </p>
 
-                  {/* Pass Box with Minimalistic Light Peach Background */}
-                  <div className="mt-8 max-w-sm mx-auto p-6 rounded-3xl border border-[#F6D3C2] bg-gradient-to-b from-[#FFF5EE] via-[#FFF1E8] to-[#FFEAE0] dark:from-[#2B1B14] dark:via-[#261812] dark:to-[#1F130E] dark:border-[#523326] shadow-xl shadow-orange-950/5 ring-1 ring-[#F4BFA8]/60 dark:ring-[#754432]/40 relative overflow-hidden">
+                  {/* Pass Box with Minimalistic Tan Background */}
+                  <div className="mt-8 max-w-sm mx-auto p-6 rounded-3xl border border-[#e2d5c5] bg-gradient-to-b from-[#faf5ee] via-[#f5ede2] to-[#eee2d3] dark:from-[#2a1f16] dark:via-[#221810] dark:to-[#1a120b] dark:border-[#523e2f] shadow-xl shadow-tan-900/10 ring-1 ring-[#c89b72]/40 dark:ring-[#75553e]/40 relative overflow-hidden">
                     {/* Minimal decorative accent */}
-                    <div className="absolute -top-12 -right-12 w-28 h-28 rounded-full bg-orange-400/10 blur-xl pointer-events-none" />
-                    <div className="absolute -bottom-12 -left-12 w-28 h-28 rounded-full bg-orange-400/10 blur-xl pointer-events-none" />
+                    <div className="absolute -top-12 -right-12 w-28 h-28 rounded-full bg-tan-500/10 blur-xl pointer-events-none" />
+                    <div className="absolute -bottom-12 -left-12 w-28 h-28 rounded-full bg-tan-500/10 blur-xl pointer-events-none" />
 
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-[#FFE6D9] text-[#B85324] dark:bg-[#3D251A] dark:text-[#FFA37A] border border-[#F5C7B2]/70 dark:border-[#5F3827] mb-3">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-[#eddccb] text-[#7c4d28] dark:bg-[#342417] dark:text-[#e4be9c] border border-[#dfc5ad] dark:border-[#7c4d28]/50 mb-3">
                       Digital turnstile pass
                     </div>
 
                     <div className="flex justify-center my-3.5">
-                      <div className="p-2.5 rounded-2xl bg-white shadow-sm border border-[#F2C9B6]/60">
+                      <div className="p-2.5 rounded-2xl bg-white shadow-sm border border-[#e2d5c5]">
                         <img
                           src={bookingResult.qrCodeUrl}
                           alt="Booking QR Code"

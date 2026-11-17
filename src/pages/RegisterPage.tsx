@@ -445,7 +445,7 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({
                         aria-live="polite"
                         className={`p-3.5 rounded-xl text-xs font-medium flex items-start justify-between gap-3 animate-in fade-in duration-200 ${
                           oauthNotice.type === 'cancel'
-                            ? 'bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-400'
+                            ? 'bg-primary/10 border border-primary/30 text-primary'
                             : 'bg-destructive/10 border border-destructive/20 text-destructive'
                         }`}
                       >

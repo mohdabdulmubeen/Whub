@@ -29,107 +29,129 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenListSpace 
 
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden" aria-label="Hero section">
-        <div className="absolute inset-0 bg-dots opacity-40 pointer-events-none"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/80 to-background pointer-events-none"></div>
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-16 lg:pt-28 lg:pb-24">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+      {/* Hero Section — Matching blurred background of "How can we help?" */}
+      <section
+        className="relative overflow-hidden bg-cover bg-center bg-no-repeat pt-12 pb-16 lg:pt-20 lg:pb-24 border-b border-border"
+        style={{ backgroundImage: "url('/images/cafe-bg.jpg')" }}
+        aria-label="Hero section"
+      >
+        {/* Same blurred background overlay as "How can we help?" section */}
+        <div className="absolute inset-0 bg-slate-950/65 dark:bg-slate-950/80 backdrop-blur-[2px] pointer-events-none" />
+
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-14 items-center">
+            {/* Left Column: Headline, Description, CTAs & Benefits */}
             <div>
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-4 py-1.5 text-sm font-medium text-muted-foreground backdrop-blur-sm shadow-xs">
+              {/* Live Badge */}
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 text-white px-4 py-1.5 text-xs font-semibold backdrop-blur-md shadow-2xs">
                 <span className="relative flex h-2 w-2" aria-hidden="true">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-75"></span>
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-success"></span>
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
                 </span>
-                11 {t('hero.statSeats', 'seats available')}
+                11 {t('hero.statSeats', 'seats available')} • Live Availability
               </div>
 
-              {/* Heading */}
-              <h1 className="mt-6 font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-balance leading-tight">
-                {t('hero.titleLine1', "India’s Go-To")} <br />
-                <span className="text-primary">{t('hero.titleLine2', 'Workspace Platform')}</span>
+              {/* Highlight Headline */}
+              <h1 className="mt-6 font-display text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.12]">
+                Work Where Ideas <br />
+                <span className="bg-gradient-to-r from-tan-400 via-primary to-tan-500 bg-clip-text text-transparent drop-shadow-xs">
+                  Turn Into Momentum
+                </span>
               </h1>
 
-              <p className="mt-6 text-lg text-muted-foreground max-w-lg leading-relaxed">
-                {t('hero.subtitle', 'Book premium coworking spaces, hot desks & meeting rooms in minutes. Work from anywhere.')}
+              {/* Highlight Description */}
+              <p className="mt-6 text-base sm:text-lg text-slate-200 dark:text-slate-300 max-w-lg leading-relaxed font-normal">
+                Reserve on-demand ergonomic desks, collaboration zones, and private meeting pods in minutes. High-speed optical Wi-Fi, table service, and zero lock-in.
               </p>
 
               {/* CTAs */}
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="mt-8 flex flex-wrap gap-3.5 sm:gap-4">
                 <button
                   type="button"
                   onClick={() => onNavigate('booking')}
-                  className="inline-flex items-center justify-center font-medium transition-all bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl gap-2 text-base h-12 px-6 shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 cursor-pointer focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                  className="inline-flex items-center justify-center font-bold transition-all bg-gradient-to-r from-primary to-tan-600 hover:from-primary/95 hover:to-tan-700 text-white rounded-xl gap-2.5 text-base h-12 sm:h-13 px-7 shadow-lg hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-1 active:translate-y-0 cursor-pointer focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                 >
-                  <span>{t('hero.ctaBook', 'Book your seat')}</span>
+                  <span>Book a Workspace</span>
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </button>
 
                 <button
                   type="button"
                   onClick={onOpenListSpace}
-                  className="inline-flex items-center justify-center font-medium transition-all bg-card hover:bg-accent text-muted-foreground hover:text-foreground border border-border/80 rounded-xl gap-2 text-base h-12 px-5 shadow-xs hover:shadow-sm active:translate-y-0 cursor-pointer focus-visible:ring-2 focus-visible:ring-primary"
+                  className="inline-flex items-center justify-center font-semibold transition-all bg-white/10 hover:bg-white/20 text-white border border-white/25 rounded-xl gap-2 text-base h-12 sm:h-13 px-6 shadow-xs hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 cursor-pointer focus-visible:ring-2 focus-visible:ring-primary backdrop-blur-md"
                 >
-                  <Building2 className="h-4 w-4 text-muted-foreground" />
+                  <Building2 className="h-4 w-4 text-slate-300" />
                   <span>List your space</span>
                 </button>
               </div>
 
-              {/* Features inline */}
-              <div className="mt-8 flex items-center gap-5 text-sm text-muted-foreground">
-                <div className="flex items-center gap-1.5">
-                  <Wifi className="h-4 w-4 text-success" />
-                  Fast Wi-Fi
+              {/* Benefits with simple icons & compact labels */}
+              <div className="mt-8 flex flex-wrap items-center gap-3 sm:gap-3.5 text-xs sm:text-sm font-semibold text-white">
+                <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/10 border border-white/20 shadow-xs backdrop-blur-md hover:scale-105 transition-transform duration-200">
+                  <div className="p-1 rounded-lg bg-emerald-500/20 text-emerald-400">
+                    <Wifi className="h-4 w-4" />
+                  </div>
+                  <span>Fast Wi-Fi</span>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <Zap className="h-4 w-4 text-success" />
-                  Power at every seat
+                <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/10 border border-white/20 shadow-xs backdrop-blur-md hover:scale-105 transition-transform duration-200">
+                  <div className="p-1 rounded-lg bg-amber-500/20 text-amber-400">
+                    <Zap className="h-4 w-4" />
+                  </div>
+                  <span>Power at every seat</span>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <Coffee className="h-4 w-4 text-success" />
-                  Coffee to your desk
+                <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/10 border border-white/20 shadow-xs backdrop-blur-md hover:scale-105 transition-transform duration-200">
+                  <div className="p-1 rounded-lg bg-tan-500/20 text-tan-300">
+                    <Coffee className="h-4 w-4" />
+                  </div>
+                  <span>Coffee to your desk</span>
                 </div>
               </div>
             </div>
 
-            {/* Right Hero Visual Card */}
-            <div className="relative">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl ring-1 ring-border">
+            {/* Right Column: Original Workspace Visual in HD Quality */}
+            <div className="relative group [perspective:1200px]">
+              {/* Subtle ambient 3D glow */}
+              <div className="absolute -inset-4 bg-gradient-to-tr from-primary/20 via-tan-500/15 to-amber-500/10 rounded-3xl blur-2xl opacity-60 group-hover:opacity-90 transition-opacity duration-700 -z-10 pointer-events-none" />
+
+              {/* Main Card — Displaying Original Image in Crisp HD Quality */}
+              <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] border border-white/30 dark:border-slate-700/80 bg-slate-900 group-hover:scale-[1.01] transition-all duration-500">
                 <img
-                  src="https://images.pexels.com/photos/4339913/pexels-photo-4339913.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+                  src="/images/original-workspace.jpg"
                   alt="Professionals working in a modern cafe co-working space"
-                  className="w-full h-auto object-cover"
+                  className="w-full h-auto object-cover rounded-2xl sm:rounded-3xl transition-transform duration-700 ease-out"
+                  loading="eager"
+                  decoding="async"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
               </div>
 
-              {/* Bottom Floating Badge */}
-              <div className="absolute -bottom-5 -left-5 hidden sm:block">
-                <div className="rounded-xl border bg-card text-card-foreground w-56 shadow-xl border-border/70 backdrop-blur-md p-4">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-success/15 text-success">
-                      <QrCode className="h-5 w-5" />
+              {/* 3D Floating QR Check-In Glass Badge (Bottom Left) */}
+              <div className="absolute -bottom-5 -left-5 hidden sm:block transform-gpu hover:-translate-y-1 transition-all duration-300">
+                <div className="rounded-2xl border border-white/40 dark:border-slate-700/80 bg-white/95 dark:bg-slate-900/95 text-card-foreground shadow-[0_15px_35px_rgba(0,0,0,0.2)] backdrop-blur-xl p-4 flex items-center gap-3.5">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-md">
+                    <QrCode className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-1.5">
+                      <p className="text-sm font-black text-foreground">QR Check-In</p>
+                      <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">Instant</span>
                     </div>
-                    <div>
-                      <p className="text-sm font-semibold">QR Check-In</p>
-                      <p className="text-xs text-muted-foreground">Scan & sit in 5 sec</p>
-                    </div>
+                    <p className="text-xs text-muted-foreground mt-0.5">Scan &amp; sit in 5 sec</p>
                   </div>
                 </div>
               </div>
 
-              {/* Top Floating Badge */}
-              <div className="absolute -top-5 -right-5 hidden sm:block">
-                <div className="rounded-xl border bg-card text-card-foreground w-52 shadow-xl border-border/70 backdrop-blur-md p-4">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/15 text-primary">
-                      <Star className="h-5 w-5 fill-current" />
+              {/* 3D Floating Rating & Members Glass Badge (Top Right) */}
+              <div className="absolute -top-5 -right-5 hidden sm:block transform-gpu hover:-translate-y-1 transition-all duration-300">
+                <div className="rounded-2xl border border-white/40 dark:border-slate-700/80 bg-white/95 dark:bg-slate-900/95 text-card-foreground shadow-[0_15px_35px_rgba(0,0,0,0.2)] backdrop-blur-xl p-4 flex items-center gap-3.5">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-tan-600 text-white shadow-md">
+                    <Star className="h-5 w-5 fill-current" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-1.5">
+                      <p className="text-sm font-black text-foreground">4.8 / 5.0</p>
+                      <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-amber-500/15 text-amber-600 dark:text-amber-400">Verified</span>
                     </div>
-                    <div>
-                      <p className="text-sm font-semibold">4.8 / 5.0</p>
-                      <p className="text-xs text-muted-foreground">2,400+ bookings</p>
-                    </div>
+                    <p className="text-xs text-muted-foreground mt-0.5">2,400+ bookings</p>
                   </div>
                 </div>
               </div>
@@ -138,25 +160,25 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenListSpace 
 
           {/* Stats Grid */}
           <div className="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="rounded-xl border border-border bg-card p-5 shadow-xs">
-              <p className="text-3xl font-bold font-display text-foreground">12</p>
-              <p className="text-sm text-muted-foreground mt-1 font-medium">{t('hero.statSeats', 'Seats available')}</p>
-              <p className="text-xs text-muted-foreground/70">/15 live</p>
+            <div className="rounded-xl border border-white/20 bg-white/10 dark:bg-slate-900/60 backdrop-blur-md p-5 shadow-lg">
+              <p className="text-3xl font-bold font-display text-white">12</p>
+              <p className="text-sm text-slate-200 dark:text-slate-300 mt-1 font-medium">{t('hero.statSeats', 'Seats available')}</p>
+              <p className="text-xs text-slate-400">/15 live</p>
             </div>
-            <div className="rounded-xl border border-border bg-card p-5 shadow-xs">
-              <p className="text-3xl font-bold font-display text-foreground">4</p>
-              <p className="text-sm text-muted-foreground mt-1 font-medium">{t('hero.statZones', 'Unique zones')}</p>
-              <p className="text-xs text-muted-foreground/70">tailored spaces</p>
+            <div className="rounded-xl border border-white/20 bg-white/10 dark:bg-slate-900/60 backdrop-blur-md p-5 shadow-lg">
+              <p className="text-3xl font-bold font-display text-white">4</p>
+              <p className="text-sm text-slate-200 dark:text-slate-300 mt-1 font-medium">{t('hero.statZones', 'Unique zones')}</p>
+              <p className="text-xs text-slate-400">tailored spaces</p>
             </div>
-            <div className="rounded-xl border border-border bg-card p-5 shadow-xs">
-              <p className="text-3xl font-bold font-display text-foreground">100%</p>
-              <p className="text-sm text-muted-foreground mt-1 font-medium">{t('hero.statFlex', 'Flexible access')}</p>
-              <p className="text-xs text-muted-foreground/70">on-demand entry</p>
+            <div className="rounded-xl border border-white/20 bg-white/10 dark:bg-slate-900/60 backdrop-blur-md p-5 shadow-lg">
+              <p className="text-3xl font-bold font-display text-white">100%</p>
+              <p className="text-sm text-slate-200 dark:text-slate-300 mt-1 font-medium">{t('hero.statFlex', 'Flexible access')}</p>
+              <p className="text-xs text-slate-400">on-demand entry</p>
             </div>
-            <div className="rounded-xl border border-border bg-card p-5 shadow-xs">
-              <p className="text-3xl font-bold font-display text-foreground">4.8</p>
-              <p className="text-sm text-muted-foreground mt-1 font-medium">{t('hero.statRating', 'Avg. rating')}</p>
-              <p className="text-xs text-muted-foreground/70">/5.0</p>
+            <div className="rounded-xl border border-white/20 bg-white/10 dark:bg-slate-900/60 backdrop-blur-md p-5 shadow-lg">
+              <p className="text-3xl font-bold font-display text-white">4.8</p>
+              <p className="text-sm text-slate-200 dark:text-slate-300 mt-1 font-medium">{t('hero.statRating', 'Avg. rating')}</p>
+              <p className="text-xs text-slate-400">/5.0</p>
             </div>
           </div>
         </div>

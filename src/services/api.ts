@@ -148,6 +148,22 @@ export const api = {
         `CELPIN-PASS:${bookingRef}:${payload.seatId || 'Q1'}:${effectiveStartDate}:${pin}`
       )}`;
 
+      const daysCount = payload.bookingType === 'weekly'
+        ? 7
+        : payload.bookingType === 'monthly'
+        ? (Number(payload.termCount) || 1) * 30
+        : payload.bookingType === 'custom'
+        ? Number(payload.termCount) || 1
+        : 1;
+
+      const summaryText = payload.bookingType === 'weekly'
+        ? '1 Week (7 Days) Membership Pass'
+        : payload.bookingType === 'monthly'
+        ? `${payload.termCount || 1} Month Dedicated Pass`
+        : payload.bookingType === 'custom'
+        ? `${payload.termCount || 1} Days Custom Pass`
+        : `${payload.duration || 2} hours session`;
+
       const fallbackBooking: Booking = {
         id: `local_${Date.now()}`,
         bookingRef,
@@ -162,14 +178,14 @@ export const api = {
         recurrenceDays: payload.recurrenceDays || [],
         termUnit: payload.bookingType === 'hourly' ? 'hours' : 'days',
         termCount: Number(payload.termCount) || 1,
-        daysCount: 1,
+        daysCount,
         preferences: payload.preferences || [],
         seatCost: payload.seatCost || 0,
         foodCost: payload.foodCost || 0,
         discount: payload.discount || 0,
         totalCost: payload.totalCost || (payload.seatCost + payload.foodCost - (payload.discount || 0)),
         dailyCapApplied: false,
-        itemizedBreakdown: { summaryText: `${payload.duration || 2} hours session` },
+        itemizedBreakdown: { summaryText },
         pin,
         qrCodeUrl,
         status: 'confirmed',

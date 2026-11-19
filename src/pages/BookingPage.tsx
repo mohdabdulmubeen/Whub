@@ -172,7 +172,27 @@ export const BookingPage: React.FC<BookingPageProps> = ({
   useEffect(() => {
     if (location.date) {
       const locStart = location.date;
-      const locEnd = location.endDate || location.date;
+      let locEnd = location.endDate || location.date;
+
+      if (bookingType === 'weekly') {
+        locEnd = addDays(locStart, 6);
+        setWeeklyStartDate(locStart);
+        setWeeklyEndDate(locEnd);
+        setCustomStartDate(locStart);
+        setCustomEndDate(locEnd);
+        return;
+      }
+
+      if (bookingType === 'monthly') {
+        const count = Math.max(1, monthlyTermCount);
+        locEnd = addDays(locStart, count * 30 - 1);
+        setMonthlyStartDate(locStart);
+        setMonthlyEndDate(locEnd);
+        setCustomStartDate(locStart);
+        setCustomEndDate(locEnd);
+        return;
+      }
+
       const locDays = getDaysDifference(locStart, locEnd);
 
       setCustomStartDate(locStart);
@@ -182,11 +202,9 @@ export const BookingPage: React.FC<BookingPageProps> = ({
       setMonthlyStartDate(locStart);
       setMonthlyEndDate(addDays(locStart, 29));
 
-      // Predefined plans appear only when the selected days exactly match the predefined duration.
-      // Any other day selection (e.g. 2 days, 4 days) automatically falls under Custom.
       if (locDays === 7) {
         setBookingType('weekly');
-      } else if (locDays === 30) {
+      } else if (locDays === 30 || locDays % 30 === 0) {
         setBookingType('monthly');
       } else if (locDays === 1) {
         if (bookingType !== 'hourly' && bookingType !== 'custom') {
@@ -196,7 +214,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({
         setBookingType('custom');
       }
     }
-  }, [location.date, location.endDate]);
+  }, [location.date, location.endDate, bookingType, monthlyTermCount]);
 
   // Enforce strict 7-day range for Weekly mode: starts on weeklyStartDate, ends 6 days later
   useEffect(() => {
@@ -234,51 +252,57 @@ export const BookingPage: React.FC<BookingPageProps> = ({
     return { start, end, days };
   }, [bookingType, location.date, todayStr, weeklyStartDate, weeklyEndDate, monthlyStartDate, monthlyEndDate, customStartDate, customEndDate]);
 
-  // Predefined plans should appear only when selected days exactly match predefined duration.
-  // Any other day selection automatically falls under Custom.
+  // Only auto-switch to custom if user selected a custom multi-day range that does not match predefined weekly/monthly
   useEffect(() => {
+    if (bookingType === 'weekly' || bookingType === 'monthly' || bookingType === 'hourly') {
+      return;
+    }
     const days = activeSelectedRange.days;
-    if (days !== 1 && days !== 7 && days !== 30) {
+    if (days !== 1 && days !== 7 && days % 30 !== 0) {
       if (bookingType !== 'custom') {
         setBookingType('custom');
       }
     }
   }, [activeSelectedRange.days, bookingType]);
 
-  // Available Duration Plans for Booking Summary
+  // Available Duration Plans for Booking Summary — Always includes Hourly, Weekly, Monthly, and Custom
   const availableDurationPlans = useMemo(() => {
-    const days = activeSelectedRange.days;
-    const plans: { value: BookingDurationType; label: string }[] = [];
-
-    // Predefined plans appear ONLY when the selected days exactly match the predefined duration
-    if (days === 1) {
-      plans.push({ value: 'hourly', label: 'Hourly' });
-    }
-
-    // Custom is always available (and is the ONLY plan for random combinations like 2 or 4 days)
-    plans.push({ value: 'custom', label: 'Custom' });
-
-    if (days === 7) {
-      plans.push({ value: 'weekly', label: 'Weekly' });
-    }
-
-    if (days === 30) {
-      plans.push({ value: 'monthly', label: 'Monthly' });
-    }
-
-    return plans;
-  }, [activeSelectedRange.days]);
+    return [
+      { value: 'hourly' as BookingDurationType, label: 'Hourly' },
+      { value: 'weekly' as BookingDurationType, label: 'Weekly' },
+      { value: 'monthly' as BookingDurationType, label: 'Monthly' },
+      { value: 'custom' as BookingDurationType, label: 'Custom' },
+    ];
+  }, []);
 
   const handleDurationPlanChange = (newType: BookingDurationType) => {
     setBookingType(newType);
+    setServerQuote(null); // Clear server quote to ensure instant recalculation across the whole app
+
+    const start = location.date || customStartDate || todayStr;
+
     if (newType === 'weekly') {
-      setWeeklyStartDate(customStartDate);
-      setWeeklyEndDate(addDays(customStartDate, 6));
+      const end = addDays(start, 6);
+      setWeeklyStartDate(start);
+      setWeeklyEndDate(end);
+      setWeeklyTermCount(1);
+      setCustomStartDate(start);
+      setCustomEndDate(end);
+      setLocation(prev => ({ ...prev, date: start, endDate: end }));
     } else if (newType === 'monthly') {
-      setMonthlyStartDate(customStartDate);
-      setMonthlyEndDate(addDays(customStartDate, 29));
+      const count = Math.max(1, monthlyTermCount);
+      const end = addDays(start, count * 30 - 1);
+      setMonthlyStartDate(start);
+      setMonthlyEndDate(end);
+      setCustomStartDate(start);
+      setCustomEndDate(end);
+      setLocation(prev => ({ ...prev, date: start, endDate: end }));
     } else if (newType === 'hourly') {
-      setLocation(prev => ({ ...prev, date: customStartDate, endDate: customStartDate }));
+      setCustomStartDate(start);
+      setCustomEndDate(start);
+      setLocation(prev => ({ ...prev, date: start, endDate: start }));
+    } else if (newType === 'custom') {
+      // Retain existing custom start/end dates
     }
   };
 
@@ -1878,7 +1902,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({
         bookingSummary={{
           seatName: selectedSeat?.name,
           zoneName: selectedZone.toUpperCase(),
-          durationText: `${duration} hrs (${bookingType})`,
+          durationText: computedPricing.scheduleUnitsLabel,
           totalAmount: displayGrandTotal,
           bookingType: bookingType.toUpperCase(),
           dateText: formatRangeSummary(currentScheduleParams.startDate, currentScheduleParams.endDate || currentScheduleParams.startDate)

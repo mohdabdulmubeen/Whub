@@ -31,7 +31,7 @@ export const ReelCard: React.FC = () => {
             {/* Instagram Profile Card */}
             <div className="p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full p-0.5 bg-gradient-to-tr from-amber-400 via-rose-500 to-purple-600">
+                <div className="w-12 h-12 rounded-full p-0.5 bg-gradient-to-tr from-amber-400 via-primary to-tan-600">
                   <img
                     src="/images/w-hub-logo.jpg"
                     alt="W-Hub Instagram Profile"

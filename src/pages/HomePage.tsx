@@ -667,8 +667,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenListSpace 
                   <svg viewBox="0 0 40 40" className="h-6 w-6 sm:h-7 sm:w-7" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                       <linearGradient id="ecl-grad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-                        <stop stopColor="#8B5CF6" />
-                        <stop offset="1" stopColor="#EC4899" />
+                        <stop stopColor="#b5835a" />
+                        <stop offset="1" stopColor="#c59a78" />
                       </linearGradient>
                     </defs>
                     <circle
@@ -677,7 +677,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenListSpace 
                       r="14"
                       stroke="url(#ecl-grad)"
                       strokeWidth="2.5"
-                      fill="#8B5CF6"
+                      fill="#b5835a"
                       fillOpacity="0.1"
                     />
                     <path

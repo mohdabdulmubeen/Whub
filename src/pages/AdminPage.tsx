@@ -182,10 +182,10 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
         <div className="p-5 rounded-2xl bg-card border border-border/80 shadow-xs">
           <div className="flex items-center justify-between text-muted-foreground text-xs font-semibold uppercase tracking-wider mb-2">
             <span>Ecosystem Apps</span>
-            <Sparkles className="w-4 h-4 text-purple-500" />
+            <Sparkles className="w-4 h-4 text-primary" />
           </div>
           <div className="text-2xl sm:text-3xl font-bold font-display text-foreground">{applications.length}</div>
-          <span className="text-xs text-purple-600 dark:text-purple-400 mt-1 inline-block">Cohort submissions</span>
+          <span className="text-xs text-tan-600 dark:text-tan-400 mt-1 inline-block">Cohort submissions</span>
         </div>
       </div>
 

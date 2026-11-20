@@ -375,6 +375,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({
     }
 
     const orderItems = Object.entries(cart).map(([id, qty]) => {
+    
       const item = menuItems.find(i => i.id === id);
       return {
         price: item?.price || 0,
@@ -1195,7 +1196,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({
                         <h3 className="font-bold text-sm text-foreground">Weekly coworking membership pass</h3>
                         <p className="text-xs text-muted-foreground">Fixed 7-day pass starting on chosen start date and ending 6 days later</p>
                       </div>
-                      <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-600 border border-purple-500/20">
+                      <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-tan-500/15 text-tan-700 dark:text-tan-300 border border-tan-500/30">
                         15% weekly pass discount
                       </span>
                     </div>
@@ -1225,18 +1226,18 @@ export const BookingPage: React.FC<BookingPageProps> = ({
                         </label>
                         <div className="h-[42px] px-3.5 py-2 bg-muted/40 border border-border rounded-xl text-xs flex items-center justify-between text-foreground">
                           <div className="flex items-center gap-2">
-                            <CalendarRange className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                            <CalendarRange className="h-4 w-4 text-primary" />
                             <span className="font-bold">1 Week (7 Days)</span>
                           </div>
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-500/15 text-purple-700 dark:text-purple-300">
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-tan-500/15 text-tan-700 dark:text-tan-300">
                             Strict 7-Day Range
                           </span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 text-xs text-purple-900 dark:text-purple-200 flex items-center gap-2">
-                      <Info className="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0" />
+                    <div className="p-3 rounded-xl bg-tan-500/10 border border-tan-500/20 text-xs text-tan-900 dark:text-tan-200 flex items-center gap-2">
+                      <Info className="w-4 h-4 text-primary shrink-0" />
                       <span>
                         Weekly Pass: <strong>{formatRangeSummary(weeklyStartDate, weeklyEndDate)}</strong> (strictly 7 days, ending 6 days after start date). Dates outside this range cannot be selected. For other durations, switch to <strong>Custom Range</strong>.
                       </span>
@@ -1743,7 +1744,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({
                       {getDaysDifference(customStartDate, customEndDate)} Days
                     </span>
                   ) : bookingType === 'weekly' ? (
-                    <span className="text-xs font-bold text-purple-600 dark:text-purple-400">
+                    <span className="text-xs font-bold text-primary">
                       1 Week (7 Days)
                     </span>
                   ) : (

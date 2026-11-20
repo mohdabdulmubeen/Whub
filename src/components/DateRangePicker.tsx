@@ -164,7 +164,7 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
                 {hasRangeSelected && mode !== 'single' && (
                   <span className={`text-[10px] font-bold px-1.5 py-0.2 rounded-md shrink-0 ${
                     isWeekly
-                      ? 'bg-purple-500/15 text-purple-700 dark:text-purple-300'
+                      ? 'bg-tan-500/15 text-tan-700 dark:text-tan-300'
                       : isCustom
                       ? 'bg-blue-500/15 text-blue-700 dark:text-blue-300'
                       : 'bg-primary/10 text-primary'
@@ -179,7 +179,7 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
                 {hasRangeSelected && mode !== 'single' && (
                   <div className="text-[10px] text-muted-foreground flex items-center gap-1 truncate mt-0.5">
                     {isWeekly ? (
-                      <span className="font-semibold text-purple-600 dark:text-purple-400">7-day pass (fixed range)</span>
+                      <span className="font-semibold text-primary">7-day pass (fixed range)</span>
                     ) : isCustom ? (
                       <span>{daysCount} {daysCount === 1 ? 'day selected' : 'days total (flexible)'}</span>
                     ) : (
@@ -198,7 +198,7 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
           {!compact && hasRangeSelected && mode !== 'single' && (
             <span className={`hidden sm:inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] font-bold border ${
               isWeekly
-                ? 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border-purple-500/30'
+                ? 'bg-tan-500/15 text-tan-700 dark:text-tan-300 border-tan-500/30'
                 : isCustom
                 ? 'bg-blue-500/15 text-blue-700 dark:text-blue-300 border-blue-500/30'
                 : 'bg-primary/15 text-foreground border-primary/25'

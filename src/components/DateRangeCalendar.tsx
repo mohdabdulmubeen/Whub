@@ -443,8 +443,8 @@ export const DateRangeCalendar: React.FC<DateRangeCalendarProps> = ({
         {/* Mode Reflection Banner */}
         <div className="mb-2.5 flex items-center justify-between gap-2">
           {isWeekly ? (
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/30">
-              <CalendarRange className="h-3.5 w-3.5 text-purple-600 dark:text-purple-400" />
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-tan-500/15 text-tan-700 dark:text-tan-300 border border-tan-500/30">
+              <CalendarRange className="h-3.5 w-3.5 text-primary" />
               <span>Weekly Pass • Strict 7-Day Range</span>
             </span>
           ) : isCustom ? (
@@ -463,7 +463,7 @@ export const DateRangeCalendar: React.FC<DateRangeCalendarProps> = ({
             <span
               className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold border ${
                 isWeekly
-                  ? 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border-purple-500/30'
+                  ? 'bg-tan-500/15 text-tan-700 dark:text-tan-300 border-tan-500/30'
                   : isCustom
                   ? 'bg-blue-500/15 text-blue-700 dark:text-blue-300 border-blue-500/30'
                   : 'bg-primary/15 text-foreground border-primary/30'
@@ -693,19 +693,19 @@ export const DateRangeCalendar: React.FC<DateRangeCalendarProps> = ({
             cellBg = 'bg-primary text-primary-foreground font-bold shadow-md ring-2 ring-primary/40';
             roundedCorners = 'rounded-xl';
           } else if (isStart) {
-            cellBg = isWeekly ? 'bg-purple-600 text-white font-bold shadow-md' : 'bg-primary text-primary-foreground font-bold shadow-md';
+            cellBg = 'bg-primary text-primary-foreground font-bold shadow-md';
             roundedCorners = 'rounded-l-xl rounded-r-none';
           } else if (isEnd) {
-            cellBg = isWeekly ? 'bg-purple-600 text-white font-bold shadow-md' : 'bg-primary text-primary-foreground font-bold shadow-md';
+            cellBg = 'bg-primary text-primary-foreground font-bold shadow-md';
             roundedCorners = 'rounded-r-xl rounded-l-none';
           } else if (inRange) {
             cellBg = isWeekly
-              ? 'bg-purple-500/20 text-purple-950 dark:text-purple-100 font-semibold'
+              ? 'bg-tan-500/25 text-tan-950 dark:text-tan-100 font-semibold'
               : 'bg-primary/20 text-foreground font-semibold';
             roundedCorners = 'rounded-none';
           } else if (inHoverRange) {
             cellBg = isWeekly
-              ? 'bg-purple-500/15 text-foreground font-medium'
+              ? 'bg-tan-500/15 text-foreground font-medium'
               : 'bg-primary/10 text-foreground font-medium';
             roundedCorners = 'rounded-none';
           } else if (isOutsideWeekly) {
@@ -730,7 +730,7 @@ export const DateRangeCalendar: React.FC<DateRangeCalendarProps> = ({
               className={`relative p-0 flex items-center justify-center calendar-ribbon-cell ${
                 inRange && !isStart && !isEnd
                   ? isWeekly
-                    ? 'bg-purple-500/10 dark:bg-purple-500/15'
+                    ? 'bg-tan-500/10 dark:bg-tan-500/15'
                     : 'bg-primary/10 dark:bg-primary/15'
                   : ''
               }`}

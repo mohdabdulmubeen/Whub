@@ -88,7 +88,7 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({ onNaviga
       case 'support_reply':
         return <LifeBuoy className="h-4 w-4 text-indigo-500" />;
       case 'saved_space_availability':
-        return <BookmarkCheck className="h-4 w-4 text-purple-500" />;
+        return <BookmarkCheck className="h-4 w-4 text-primary" />;
       case 'booking_review_request':
         return <Star className="h-4 w-4 text-yellow-500" />;
       default:

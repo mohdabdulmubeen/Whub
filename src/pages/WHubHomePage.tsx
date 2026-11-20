@@ -199,7 +199,7 @@ export const WHubHomePage: React.FC<WHubHomePageProps> = ({ onOpenApply }) => {
             </div>
 
             <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm text-center">
-              <strong className="block font-display text-3xl sm:text-4xl font-black text-purple-600 dark:text-purple-400">
+              <strong className="block font-display text-3xl sm:text-4xl font-black text-tan-600 dark:text-tan-400">
                 ₹1.8 Cr+
               </strong>
               <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mt-1 block">

@@ -48,7 +48,7 @@ export const ProgramsSection: React.FC<ProgramsSectionProps> = ({ onOpenApply })
       description: 'High-speed gigabit Wi-Fi, collaborative hot desks, podcast recording room, event auditorium, and conference spaces built for innovators who work with urgency.',
       metrics: '24/7 Access • Meeting Rooms • Community Lounge',
       icon: Building2,
-      color: 'from-purple-600 to-pink-600',
+      color: 'from-primary to-tan-600',
       actionRole: 'startup' as const
     }
   ];

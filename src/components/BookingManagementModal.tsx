@@ -119,8 +119,8 @@ export const BookingManagementModal: React.FC<BookingManagementModalProps> = ({
         );
       case 'weekly':
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20">
-            <CalendarRange className="w-3 h-3" /> Weekly Pass
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-tan-500/15 text-tan-700 dark:text-tan-300 border border-tan-500/30">
+            <CalendarRange className="w-3 h-3 text-primary" /> Weekly Pass
           </span>
         );
       case 'monthly':

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, CheckCircle2 } from 'lucide-react';
+import { ChevronDown, CheckCircle2, Coffee } from 'lucide-react';
 
 export const ContactSection: React.FC = () => {
   const [form, setForm] = useState({
@@ -27,39 +27,66 @@ export const ContactSection: React.FC = () => {
   return (
     <section
       id="contact"
-      className="relative py-16 sm:py-20 lg:py-28 bg-cover bg-center bg-no-repeat overflow-hidden border-t border-border"
-      style={{ backgroundImage: "url('/images/cafe-bg.jpg')" }}
+      className="relative py-16 sm:py-20 lg:py-28 bg-slate-50/70 dark:bg-slate-950/70 overflow-hidden border-t border-border"
       aria-labelledby="contact-heading"
     >
-      {/* Ambient backdrop overlay to ensure deep contrast and elegance */}
-      <div className="absolute inset-0 bg-slate-950/65 dark:bg-slate-950/80 backdrop-blur-[2px] pointer-events-none" />
+      {/* Subtle ambient gradient highlights for depth */}
+      <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-background to-transparent pointer-events-none" />
+      <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        {/* Main Split Panel: Workspace Photo on Left & Clean Form Panel on Right */}
-        <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 grid grid-cols-1 lg:grid-cols-12 transition-all duration-300">
-          {/* Left: Sizable Workspace Photo (Stacked on smaller screens, 7 cols on lg) */}
-          <div className="relative lg:col-span-7 min-h-[280px] sm:min-h-[380px] lg:min-h-[580px] bg-slate-100 dark:bg-slate-800 overflow-hidden group">
-            <img
-              src="/images/cafe-bg.jpg"
-              alt="Celpin Modern Workspace Solutions"
-              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent pointer-events-none" />
+        {/* Main 3D Container with Depth & Perspective */}
+        <div className="relative group [perspective:1200px]">
+          {/* Ambient 3D Backing Glow */}
+          <div className="absolute -inset-3 bg-gradient-to-tr from-primary/15 via-tan-500/10 to-amber-500/10 rounded-3xl blur-2xl opacity-50 group-hover:opacity-80 transition-opacity duration-700 pointer-events-none -z-10" />
 
-            {/* Bottom-left aesthetic workspace highlight */}
-            <div className="absolute bottom-5 left-5 right-5 sm:bottom-7 sm:left-7 sm:right-7 text-white pointer-events-none">
-              <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white/20 backdrop-blur-md border border-white/30 text-white mb-2 shadow-xs">
-                Celpin Workspace Solutions
-              </span>
-              <p className="font-display text-lg sm:text-xl font-bold leading-snug drop-shadow-sm">
-                Tailored meeting suites, private offices & flexible desks
-              </p>
+          {/* Main Split Panel: Realistic 3D Workspace Card on Left & Clean Form Panel on Right */}
+          <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 grid grid-cols-1 lg:grid-cols-12 transition-all duration-500 group-hover:scale-[1.005]">
+            {/* Left: 3D Visual with Image named "sample" & Polished Aligned Overlay */}
+            <div className="relative lg:col-span-7 min-h-[340px] sm:min-h-[440px] lg:min-h-[600px] bg-slate-900 overflow-hidden">
+              <img
+                src="/images/sample.jpg"
+                alt="Business professionals collaborating over coffee and laptop in a modern cafe workspace"
+                className="w-full h-full object-cover object-[36%_40%] group-hover:scale-105 transition-transform duration-700 ease-out"
+                loading="eager"
+                decoding="async"
+              />
+
+              {/* Polished Aligned Top Badge */}
+              <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-10">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 dark:bg-slate-900/90 text-white backdrop-blur-md border border-white/20 shadow-lg text-xs font-semibold">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  </span>
+                  <span>Workspace Solutions</span>
+                </div>
+              </div>
+
+              {/* Polished Aligned Bottom Overlay */}
+              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8 bg-gradient-to-t from-slate-950/90 via-slate-950/45 to-transparent text-white pointer-events-none">
+                <div className="flex flex-col gap-2">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider bg-tan-500/30 text-tan-200 border border-tan-400/30 backdrop-blur-xs w-fit">
+                    <Coffee className="h-3 w-3 text-tan-300" />
+                    <span>Cafe meetings</span>
+                  </span>
+                  <p className="font-display text-xl sm:text-2xl font-bold leading-snug drop-shadow-sm text-white">
+                    Tailored meeting suites &amp; hybrid desks
+                  </p>
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm text-slate-300 font-normal mt-1">
+                    <span className="flex items-center gap-1.5 font-medium text-emerald-400">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                      Instant callback
+                    </span>
+                    <span className="text-slate-500">•</span>
+                    <span>Custom seating plans</span>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
 
-          {/* Right: Clean, Light-Colored Contact Form Panel */}
-          <div className="lg:col-span-5 bg-white dark:bg-slate-900 p-6 sm:p-9 lg:p-11 flex flex-col justify-center">
+            {/* Right: Clean, High-Legibility Contact Form Panel */}
+            <div className="lg:col-span-5 bg-white dark:bg-slate-900 p-6 sm:p-9 lg:p-11 flex flex-col justify-center">
             <div>
               <h2
                 id="contact-heading"
@@ -200,6 +227,7 @@ export const ContactSection: React.FC = () => {
                 </div>
               </form>
             )}
+          </div>
           </div>
         </div>
       </div>

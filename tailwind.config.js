@@ -52,7 +52,7 @@ export default {
           1: '#b5835a',
           2: '#06b6d4',
           3: '#10b981',
-          4: '#8b5cf6'
+          4: '#c59a78'
         }
       },
       fontFamily: {

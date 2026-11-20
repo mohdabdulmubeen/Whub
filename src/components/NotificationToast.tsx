@@ -40,7 +40,7 @@ export const NotificationToast: React.FC<NotificationToastProps> = ({ onNavigate
       case 'support':
         return <LifeBuoy className="h-4 w-4 text-rose-500" />;
       case 'optional':
-        return <Star className="h-4 w-4 text-purple-500" />;
+        return <Star className="h-4 w-4 text-primary" />;
       default:
         return <Bell className="h-4 w-4 text-primary" />;
     }
